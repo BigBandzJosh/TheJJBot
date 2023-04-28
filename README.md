@@ -1,0 +1,2 @@
+# TheJJBot
+Discord Bot project!
