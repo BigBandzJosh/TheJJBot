@@ -1,27 +1,26 @@
-const {Events} = require('discord.js');
+const { Events } = require('discord.js');
 
 module.exports = {
-    
-    name: Events.InteractionCreate,
-    
-    // This event executes when a slash command is used.
-    async execute(interaction) {
-        if (!interaction.isCommand()) return;
+	name: Events.InteractionCreate,
+	async execute(interaction) {
+		if (interaction.isChatInputCommand()) {
+			const command = interaction.client.commands.get(interaction.commandName);
 
-        const command = interaction.client.commands.get(interaction.commandName);
-        // If the command doesn't exist, do nothing
-        if (!command) {
-        console.error(`no command found for ${interaction.commandName}`);
-        return;
-    }
+			if (!command) {
+				console.error(`No command matching ${interaction.commandName} was found.`);
+				return;
+			}
 
-
-    //tries to execute the command, if it fails, it will send an error message
-    try {
-        await command.execute(interaction);
-    } catch (error) {
-        console.error(error);
-        await interaction.reply({content: 'There was an error while executing this command!', ephemeral: true});
-    }
-},
+			try {
+				await command.execute(interaction);
+			} catch (error) {
+				console.error(`Error executing ${interaction.commandName}`);
+				console.error(error);
+			}
+		} else if (interaction.isButton()) {
+			// respond to the button
+		} else if (interaction.isStringSelectMenu()) {
+			// respond to the select menu
+		}
+	},
 };
