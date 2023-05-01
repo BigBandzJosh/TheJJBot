@@ -1,4 +1,4 @@
-//Discord bot by: Jaegar and 
+//Discord bot by: Jaegar and Josh
 
 //fs or file system to read files
 const fs = require('node:fs');
@@ -36,7 +36,7 @@ for (const folder of commandFolders) {
             }
         }
     }
-    
+
 // This code loads all the event files in the events folder
 // and executes them when the corresponding event is emitted.
 const eventsPath = path.join(__dirname, 'events');
