@@ -25,7 +25,7 @@ const rest = new REST().setToken(process.env.DiscordAPI);
         console.log(`Started refreshing ${commands.length} application (/) commands.`);
 
         await rest.put(
-            Routes.applicationGuildCommands(process.env.ClientID, process.env.GuildID),
+            Routes.applicationCommands(process.env.ClientID),
             {body: commands},
         );
 
