@@ -61,42 +61,42 @@ client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isChatInputCommand()) return;
   
     // Event Creator Interaction
-    if (interaction.commandName === 'event') {
-      try {
-        // Create the modal
-        const modal = new ModalBuilder()
-          .setCustomId('myModal')
-          .setTitle('My Modal');
+    // if (interaction.commandName === 'event') {
+    //   try {
+    //     // Create the modal
+    //     const modal = new ModalBuilder()
+    //       .setCustomId('myModal')
+    //       .setTitle('My Modal');
   
-        // Add components to modal
+    //     // Add components to modal
   
-        // Create the text input components
-        const favoriteColorInput = new TextInputBuilder()
-          .setCustomId('favoriteColorInput')
-          .setLabel("What's your favorite color?")
-          .setStyle(TextInputStyle.Short);
+    //     // Create the text input components
+    //     const eventName = new TextInputBuilder()
+    //       .setCustomId('eventName')
+    //       .setLabel("What is the name of your event?")
+    //       .setStyle(TextInputStyle.Short);
   
-        const hobbiesInput = new TextInputBuilder()
-          .setCustomId('hobbiesInput')
-          .setLabel("What's some of your favorite hobbies?")
-          .setStyle(TextInputStyle.Paragraph);
+    //     const eventDesc = new TextInputBuilder()
+    //       .setCustomId('eventDescription')
+    //       .setLabel("What is the description of your event?")
+    //       .setStyle(TextInputStyle.Paragraph);
   
-        // An action row only holds one text input,
-        // so you need one action row per text input.
-        const firstActionRow = new ActionRowBuilder().addComponents(favoriteColorInput);
-        const secondActionRow = new ActionRowBuilder().addComponents(hobbiesInput);
+    //     // An action row only holds one text input,
+    //     // so you need one action row per text input.
+    //     const firstActionRow = new ActionRowBuilder().addComponents(eventName);
+    //     const secondActionRow = new ActionRowBuilder().addComponents(eventDesc);
   
-        // Add inputs to the modal
-        modal.addComponents(firstActionRow, secondActionRow);
+    //     // Add inputs to the modal
+    //     modal.addComponents(firstActionRow, secondActionRow);
   
-        // Show the modal to the user
-        await interaction.showModal(modal);
+    //     // Show the modal to the user
+    //     await interaction.showModal(modal);
   
-      } catch (error) {
-        console.error("this is the error" + error);
-        // Handle the error here
-      }
-    }
+    //   } catch (error) {
+    //     console.error("this is the error" + error);
+    //     // Handle the error here
+    //   }
+    // }
   });
   
 
