@@ -2,6 +2,9 @@
 Discord Bot project!
 Yay!
 
+# PACKAGES/MODULES
+npm discord.js
+npm dotenv
 # START THE BOT <br/>
 npm run dev
 # CREATE NEW COMMAND: <br/>
