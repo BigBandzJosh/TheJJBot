@@ -2,7 +2,7 @@
 Discord Bot project!
 Yay!
 
-# PACKAGES/MODULES
+# PACKAGES/MODULES <br/>
 npm discord.js
 npm dotenv
 # START THE BOT <br/>
