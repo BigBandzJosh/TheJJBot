@@ -1,0 +1,23 @@
+{
+  "name": "thejjbot",
+  "version": "1.0.0",
+  "description": "Discord bot created by Jaegar Saunders and Josh Scott",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BigBandzJosh/TheJJBot.git"
+  },
+  "author": "Jaegar Saunders and Josh Scott",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BigBandzJosh/TheJJBot/issues"
+  },
+  "homepage": "https://github.com/BigBandzJosh/TheJJBot#readme",
+  "dependencies": {
+    "discord.js": "^14.9.0",
+    "dotenv": "^16.0.3"
+  }
+}
