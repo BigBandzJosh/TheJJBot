@@ -31,7 +31,9 @@ module.exports = {
 
         const weatherEmbed = new EmbedBuilder()
             .setColor(global.embedColor)
-            .setTitle(`:thermometer: Weather for ${weather.city} is degrees Celsius.`)
+            .setTitle(`:thermometer: Weather for\n ${weather.city} \n ${weather.temperature.value} degrees Celsius.\n
+            :cloud: ${weather.description}\n
+            :flag_white: ${weather.country}`)
             .setTimestamp()
         
         await interaction.editReply({ embeds: [weatherEmbed] });
