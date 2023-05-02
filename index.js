@@ -11,7 +11,12 @@ config();
 
 // Creates a new client instance
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds],
+    intents: [
+        GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
+    ],
 });
 
 
@@ -70,5 +75,13 @@ client.on(Events.InteractionCreate, async interaction => {
 
     console.log(eventName, eventDesc);
 })
+
+// client.on(Events.InteractionCreate, async interaction => {
+//     welcome(interaction);
+// })
+
+
+
+
 // Login to Discord with your client's token
 client.login(process.env.DiscordAPI);
