@@ -8,6 +8,6 @@ module.exports = {
     // This event executes when the bot is ready.
     execute(client) {
         console.log(`Ready! Logged in as ${client.user.tag}`);
-        welcome(client);
+        // welcome(client);
     },
 };

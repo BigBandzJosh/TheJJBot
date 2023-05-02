@@ -71,9 +71,9 @@ client.on(Events.InteractionCreate, async interaction => {
     console.log(eventName, eventDesc);
 })
 
-client.on(Events.InteractionCreate, async interaction => {
-    welcome(interaction);
-})
+// client.on(Events.InteractionCreate, async interaction => {
+//     welcome(interaction);
+// })
 
 
 
