@@ -1,10 +1,10 @@
 //Discord bot by: Jaegar and Josh
+const { Client, Collection, GatewayIntentBits, Events, EmbedBuilder } = require('discord.js');
 // Global colour variable
 global.embedColor = '#fa2f6c'
 //fs or file system to read files
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits, Events } = require('discord.js');
 //dotenv to store enviroment variables
 const { config } = require('dotenv')
 config();
@@ -80,7 +80,11 @@ client.on('guildMemberAdd', async member => {
 
     const guild = client.guilds.cache.get(member.guild.id);
     const channel = guild.channels.cache.get(`${guild.systemChannelId}`)
-    channel.send(`Welcome to the server ${member.user.tag}!`)
+    const welcomeEmbed = new EmbedBuilder()
+            .setColor(global.embedColor)
+            .setTitle(`:wave: Welcome ${member.user.username}!`)
+        
+    await channel.send({ embeds: [welcomeEmbed] });
 })
 
 
