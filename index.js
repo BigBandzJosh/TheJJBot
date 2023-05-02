@@ -19,7 +19,6 @@ const client = new Client({
     ],
 });
 
-const welcome = require('./events/welcome.js');
 
 //Creates a new collection for commands
 client.commands = new Collection();
@@ -78,10 +77,10 @@ client.on(Events.InteractionCreate, async interaction => {
 })
 
 client.on('guildMemberAdd', async member => {
-    console.log(`${member.user.tag} has joined the server!`);
-    const guild = member.guild;
-    const channel = guild.channels.cache.get(config.welcomeChannelID);
-    channel.send(`Welcome to the server, ${member.user}!`);
+
+    const guild = client.guilds.cache.get(member.guild.id);
+    const channel = guild.channels.cache.get(`${guild.systemChannelId}`)
+    channel.send(`Welcome to the server ${member.user.tag}!`)
 })
 
 
