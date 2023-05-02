@@ -11,7 +11,7 @@ module.exports = {
         let result = num === 1 ? 'Heads' : 'Tails';
 
         const flipEmbed = new EmbedBuilder()
-            .setColor('#fa2f6c')
+            .setColor(global.embedColor)
             .setTitle(`:coin: You flipped ${result}!`)
         
             await interaction.reply({ embeds: [flipEmbed] });

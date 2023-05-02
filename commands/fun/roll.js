@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,7 +9,7 @@ module.exports = {
         let num = Math.floor(Math.random() * 6) + 1;
 
         const rollEmbed = new EmbedBuilder()
-            .setColor('#fa2f6c')
+            .setColor(global.embedColor)
             .setTitle(`:game_die: You rolled a ${num}!`)
 
         await interaction.reply({ embeds: [rollEmbed] });

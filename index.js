@@ -1,5 +1,6 @@
 //Discord bot by: Jaegar and Josh
-
+// Global colour variable
+global.embedColor = '#fa2f6c'
 //fs or file system to read files
 const fs = require('node:fs');
 const path = require('node:path');

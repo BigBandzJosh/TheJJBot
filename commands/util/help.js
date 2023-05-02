@@ -7,7 +7,7 @@ module.exports = {
         .setDescription('Replies with a list of commands'),
     async execute(interaction) {
         const helpEmbed = new EmbedBuilder()
-            .setColor('#fa2f6c')
+            .setColor(global.embedColor)
             .setTitle('List of available slash commands.')
             .setAuthor({ name: 'TheJJBot', iconURL: 'https://i.imgur.com/AfFp7pu.png' })
             .setThumbnail('https://i.imgur.com/AfFp7pu.png')
