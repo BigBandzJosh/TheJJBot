@@ -3,7 +3,7 @@
 //fs or file system to read files
 const fs = require('node:fs');
 const path = require('node:path');
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, Events } = require('discord.js');
 //dotenv to store enviroment variables
 const { config } = require('dotenv')
 config();
@@ -55,13 +55,19 @@ for (const file of eventFiles) {
 
 
 // Interaction Receiving
-const { ActionRowBuilder, Events, ModalBuilder, TextInputBuilder, TextInputStyle } = require('discord.js');
 
 client.on(Events.InteractionCreate, async interaction => {
-    if (!interaction.isChatInputCommand()) return;
-  
+    if(!interaction.isModalSubmit()) return;
 
-  });
+    if(interaction.customId == 'event') {
+        await interaction.reply({content: 'Your Event Has Been Created!', ephemeral: true})
+    }
+
+    const eventName = interaction.fields.getTextInputValue('eventName');
+    const eventDesc = interaction.fields.getTextInputValue('eventDesc');
+
+    console.log(eventName, eventDesc);
+})
   
 
 
