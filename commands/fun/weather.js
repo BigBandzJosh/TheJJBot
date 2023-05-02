@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -29,7 +29,11 @@ module.exports = {
         weather.country = data.sys.country;
 
 
-
-        await interaction.editReply(`:thermometer: The weather for ${location} is ${weather.temperature.value} degrees Celsius.`);
+        const weatherEmbed = new EmbedBuilder()
+            .setColor('#fa2f6c')
+            .setTitle(`:thermometer: Weather for ${weather.city} is ${weather.country} degrees Celsius.`)
+            .setTimestamp()
+        
+        await interaction.editReply({ embeds: [weatherEmbed] });
     },
 };
