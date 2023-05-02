@@ -11,7 +11,12 @@ config();
 
 // Creates a new client instance
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds],
+    intents: [
+        GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMessages,
+		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.GuildMembers,
+    ],
 });
 
 const welcome = require('./events/welcome.js');
@@ -72,9 +77,13 @@ client.on(Events.InteractionCreate, async interaction => {
     console.log(eventName, eventDesc);
 })
 
-// client.on(Events.InteractionCreate, async interaction => {
-//     welcome(interaction);
-// })
+client.on('guildMemberAdd', async member => {
+    console.log(`${member.user.tag} has joined the server!`);
+    const guild = member.guild;
+    const channel = guild.channels.cache.get(config.welcomeChannelID);
+    channel.send(`Welcome to the server, ${member.user}!`);
+})
+
 
 
 
