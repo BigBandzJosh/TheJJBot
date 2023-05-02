@@ -10,8 +10,10 @@ config();
 
 // Creates a new client instance
 const client = new Client({
-    intents: [GatewayIntentBits.Guilds]
+    intents: [GatewayIntentBits.Guilds],
 });
+
+const welcome = require('./events/welcome.js');
 
 //Creates a new collection for commands
 client.commands = new Collection();
@@ -68,7 +70,12 @@ client.on(Events.InteractionCreate, async interaction => {
 
     console.log(eventName, eventDesc);
 })
-  
+
+client.on(Events.InteractionCreate, async interaction => {
+    welcome(interaction);
+})
+
+
 
 
 // Login to Discord with your client's token

@@ -21,6 +21,6 @@ module.exports = {
 			// respond to the button
 		} else if (interaction.isStringSelectMenu()) {
 			// respond to the select menu
-		}
-	},
+		} 
+  },
 };
