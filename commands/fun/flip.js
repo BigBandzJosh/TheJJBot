@@ -1,4 +1,4 @@
-const {SlashCommandBuilder} = require('discord.js');
+const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -9,6 +9,11 @@ module.exports = {
         let num = Math.floor(Math.random() * 2) + 1;
         // If the number is 1, it's heads. If it's 2, it's tails.
         let result = num === 1 ? 'Heads' : 'Tails';
-        await interaction.reply(`:coin: You flipped ${result}`);
+
+        const flipEmbed = new EmbedBuilder()
+            .setColor('#fa2f6c')
+            .setTitle(`:coin: You flipped ${result}!`)
+        
+            await interaction.reply({ embeds: [flipEmbed] });
     },
 };
