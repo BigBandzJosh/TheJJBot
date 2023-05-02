@@ -1,5 +1,5 @@
 //Discord bot by: Jaegar and Josh
-const { Client, Collection, GatewayIntentBits, Events, EmbedBuilder } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, Events, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
 // Global colour variable
 global.embedColor = '#fa2f6c'
 //fs or file system to read files
@@ -13,9 +13,9 @@ config();
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.MessageContent,
-		GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent,
+        GatewayIntentBits.GuildMembers,
     ],
 });
 
@@ -61,30 +61,78 @@ for (const file of eventFiles) {
 }
 
 
-// Interaction Receiving
+// Event command interaction listener
 
 client.on(Events.InteractionCreate, async interaction => {
-    if(!interaction.isModalSubmit()) return;
+    if (interaction.customId === 'confirmEvent' && interaction.isButton()) {
+        if (!interaction.replied) {
+            // Send a message asking the user for the event date
+            await interaction.reply({ content: "Please enter the date of the event in the format of: `DD/MM/YYYY`", ephemeral: true })
+            // Create a filter to only allow the user who started the interaction to reply
+            const filter = m => m.author.id === interaction.user.id;
+            // Create a message collector to collect the user's response
+            const collector = interaction.channel.createMessageCollector({ filter, max: 1, time: 60000 });
+            // When the user replies, console log their response
+            collector.on('collect', m => {
+                console.log(m.content)
+            })
 
-    if(interaction.customId == 'event') {
-        await interaction.reply({content: 'Your Event Has Been Created!', ephemeral: true})
+            // Send a message asking the user for the event reminder times
+            const reminderSelect = new StringSelectMenuBuilder()
+                .setCustomId('reminderSelect')
+                .setPlaceholder('Select a reminder time')
+                .addOptions(
+                    new StringSelectMenuOptionBuilder()
+                        .setLabel('1 Day Before')
+                        .setValue('1')
+                        .setDescription('Sends a reminder 1 day before the event'),
+
+                    new StringSelectMenuOptionBuilder()
+                        .setLabel('2 Days Before')
+                        .setValue('2')
+                        .setDescription('Sends a reminder 2 days before the event'),
+                    new StringSelectMenuOptionBuilder()
+                        .setLabel('3 Days Before')
+                        .setValue('3')
+                        .setDescription('Sends a reminder 3 days before the event'),
+
+                )
+            const row = new ActionRowBuilder()
+                .addComponents(reminderSelect)
+
+            await interaction.followUp({ content: "Please select a reminder time", ephemeral: true, components: [row] })
+
+            // Store the user response in a variable
+            const reminderFilter = i => i.user.id === interaction.user.id;
+            // Create a message collector to collect the user's response
+            const reminderCollector = interaction.channel.createMessageComponentCollector({ reminderFilter, max: 1, time: 60000 });
+            // When the user replies, get the message and store it in a variable
+            reminderCollector.on('collect', async i => {
+                // console log the message
+                console.log(i.values[0])
+
+                await i.deferUpdate();
+
+                await interaction.followUp({ content: `Event created with reminder ${i.values[0]} day(s) before the event.`, ephemeral: true });
+            })
+
+        }
+
+    } else if (interaction.customId === 'cancelEvent') {
+        await interaction.reply({ content: "Event was not created.", ephemeral: true })
     }
-
-    const eventName = interaction.fields.getTextInputValue('eventName');
-    const eventDesc = interaction.fields.getTextInputValue('eventDesc');
-
-    console.log(eventName, eventDesc);
 })
-
+// Member Joining event listener
 client.on('guildMemberAdd', async member => {
 
-    const guild = client.guilds.cache.get(member.guild.id);
-    const channel = guild.channels.cache.get(`${guild.systemChannelId}`)
+    const guild = client.guilds.cache.get(member.guild.id); // Get the guild the member joined
+    const channel = guild.channels.cache.get(`${guild.systemChannelId}`) // Get the system channel of the guild
+    // Create a new embed and send it to the system channel
     const welcomeEmbed = new EmbedBuilder()
-            .setColor(global.embedColor)
-            .setTitle(`:wave: Welcome ${member.user.username}!`)
-        
-    await channel.send({ embeds: [welcomeEmbed] });
+        .setColor(global.embedColor)
+        .setTitle(`:wave: Welcome ${member.user.username}!`)
+
+    await channel.send({ embeds: [welcomeEmbed] }); // Send the embed to the system channel
 })
 
 
