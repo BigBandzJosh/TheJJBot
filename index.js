@@ -76,9 +76,13 @@ client.on(Events.InteractionCreate, async interaction => {
     console.log(eventName, eventDesc);
 })
 
-// client.on(Events.InteractionCreate, async interaction => {
-//     welcome(interaction);
-// })
+client.on('guildMemberAdd', async member => {
+
+    const guild = client.guilds.cache.get(member.guild.id);
+    const channel = guild.channels.cache.get(`${guild.systemChannelId}`)
+    channel.send(`Welcome to the server ${member.user.tag}!`)
+})
+
 
 
 
