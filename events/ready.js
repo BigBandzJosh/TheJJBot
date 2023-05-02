@@ -11,6 +11,6 @@ module.exports = {
         const guild = client.guilds.cache.get(config.guildID);
         const channel = guild.channels.cache.get(config.welcomeChannelID);
         console.log(`Welcome messages will be sent to ${channel.name}`);
-    },
+    }, 
 
 };
