@@ -30,6 +30,6 @@ module.exports = {
 
 
 
-        await interaction.editReply(`The weather for ${location} is ${weather.temperature.value} degrees Celsius.`);
+        await interaction.editReply(`:thermometer: The weather for ${location} is ${weather.temperature.value} degrees Celsius.`);
     },
 };
