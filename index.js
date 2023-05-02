@@ -60,43 +60,7 @@ const { ActionRowBuilder, Events, ModalBuilder, TextInputBuilder, TextInputStyle
 client.on(Events.InteractionCreate, async interaction => {
     if (!interaction.isChatInputCommand()) return;
   
-    // Event Creator Interaction
-    // if (interaction.commandName === 'event') {
-    //   try {
-    //     // Create the modal
-    //     const modal = new ModalBuilder()
-    //       .setCustomId('myModal')
-    //       .setTitle('My Modal');
-  
-    //     // Add components to modal
-  
-    //     // Create the text input components
-    //     const eventName = new TextInputBuilder()
-    //       .setCustomId('eventName')
-    //       .setLabel("What is the name of your event?")
-    //       .setStyle(TextInputStyle.Short);
-  
-    //     const eventDesc = new TextInputBuilder()
-    //       .setCustomId('eventDescription')
-    //       .setLabel("What is the description of your event?")
-    //       .setStyle(TextInputStyle.Paragraph);
-  
-    //     // An action row only holds one text input,
-    //     // so you need one action row per text input.
-    //     const firstActionRow = new ActionRowBuilder().addComponents(eventName);
-    //     const secondActionRow = new ActionRowBuilder().addComponents(eventDesc);
-  
-    //     // Add inputs to the modal
-    //     modal.addComponents(firstActionRow, secondActionRow);
-  
-    //     // Show the modal to the user
-    //     await interaction.showModal(modal);
-  
-    //   } catch (error) {
-    //     console.error("this is the error" + error);
-    //     // Handle the error here
-    //   }
-    // }
+
   });
   
 
