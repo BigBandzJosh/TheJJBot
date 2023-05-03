@@ -18,6 +18,7 @@ const client = new Client({
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
         GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessageReactions,
     ],
 });
 
@@ -179,60 +180,21 @@ client.on(Events.InteractionCreate, async interaction => {
                         console.log('Reminder sent')
                     })
 
-                    //add the event to the database SQlite/sequeilize
-                    try {
-                       const tag = await Tags.create({
-                            date: date,
-                            reminder: reminderDate,
-                            eventJob: eventJob,
-                            reminderJob: reminderJob,
-                            username: interaction.user.username,
-                        })
-                        return console.log(`Event created for ${tag.username}`);
-                    } catch (error) {
-                        console.log(error)
-                    }
+                })
             })
-            
-        }) 
 
-        //fetch the event from the database
-        tags = await Tags.findAll({ where: { username: interaction.user.username } });
-        console.log(tags)
-        //loop through the events and send them to the user
-        for (const tag of tags) {
-            console.log(tag.date)
-            const eventEmbed = new EmbedBuilder()
-                .setColor(global.embedColor)
-                .setTitle(`Event created by ${tag.username}`)
-                .setDescription(`Event Date: ${tag.date}\nReminder Date: ${tag.reminder}`)
-            await interaction.followUp({ embeds: [eventEmbed] })
+
+
         }
+
     } else if (interaction.customId === 'cancelEvent') {
         await interaction.reply({ content: "Event was not created.", ephemeral: true })
-
     }
-}
 })
-
-
-
-
 // Member Joining event listener
 client.on('guildMemberAdd', async member => {
-
-    const guild = client.guilds.cache.get(member.guild.id); // Get the guild the member joined
-    const channel = guild.channels.cache.get(`${guild.systemChannelId}`) // Get the system channel of the guild
-    // Create a new embed and send it to the system channel
-    const welcomeEmbed = new EmbedBuilder()
-        .setColor(global.embedColor)
-        .setTitle(`:wave: Welcome ${member.user.username}!`)
-
-    await channel.send({ embeds: [welcomeEmbed] }); // Send the embed to the system channel
+    await welcomeInteraction(member, client);
 })
-
-
-
 
 
 // Login to Discord with your client's token
