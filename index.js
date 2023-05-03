@@ -8,6 +8,8 @@ const path = require('node:path');
 //dotenv to store enviroment variables
 const { config } = require('dotenv')
 config();
+const Sequelize = require('sequelize');
+
 
 // Creates a new client instance
 const client = new Client({
@@ -18,6 +20,38 @@ const client = new Client({
         GatewayIntentBits.GuildMembers,
     ],
 });
+
+// Creates a new database instance
+const database = new Sequelize({
+    host: 'localhost',
+    dialect: 'sqlite',
+    storage: 'database.sqlite',
+    logging: false,
+});
+
+// Creates a new database table for events
+const Tags = database.define('Events', {
+    name: {
+        type: Sequelize.STRING,
+        unique: true,
+    },
+    description: Sequelize.STRING,
+    date: Sequelize.DATE,
+    username: Sequelize.STRING,
+    userId: Sequelize.STRING,
+    usage_count: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+    },
+});
+client.once('ready', () => {
+    Tags.sync();
+    console.log(`Database synced! ${Tags.name} events loaded.`);
+});
+
+
+
 
 
 //Creates a new collection for commands
@@ -145,17 +179,45 @@ client.on(Events.InteractionCreate, async interaction => {
                         console.log('Reminder sent')
                     })
 
-                })
+                    //add the event to the database SQlite/sequeilize
+                    try {
+                       const tag = await Tags.create({
+                            date: date,
+                            reminder: reminderDate,
+                            eventJob: eventJob,
+                            reminderJob: reminderJob,
+                            username: interaction.user.username,
+                        })
+                        return console.log(`Event created for ${tag.username}`);
+                    } catch (error) {
+                        console.log(error)
+                    }
             })
+            
+        }) 
 
-
-
+        //fetch the event from the database
+        tags = await Tags.findAll({ where: { username: interaction.user.username } });
+        console.log(tags)
+        //loop through the events and send them to the user
+        for (const tag of tags) {
+            console.log(tag.date)
+            const eventEmbed = new EmbedBuilder()
+                .setColor(global.embedColor)
+                .setTitle(`Event created by ${tag.username}`)
+                .setDescription(`Event Date: ${tag.date}\nReminder Date: ${tag.reminder}`)
+            await interaction.followUp({ embeds: [eventEmbed] })
         }
-
     } else if (interaction.customId === 'cancelEvent') {
         await interaction.reply({ content: "Event was not created.", ephemeral: true })
+
     }
+}
 })
+
+
+
+
 // Member Joining event listener
 client.on('guildMemberAdd', async member => {
 
