@@ -61,11 +61,6 @@ for (const file of eventFiles) {
     }
 }
 
-
-
-
-
-
 // Interactions
 // "Event Command" interaction handler
 const { eventInteraction } = require('./interactions/eventInteraction');
