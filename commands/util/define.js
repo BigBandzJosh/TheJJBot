@@ -28,39 +28,16 @@ module.exports = {
 
         // Accessing the first definition object
         const definition = wordData[0].meanings[0].definitions[0].definition;
-        const example = wordData[0].meanings[0].definitions[1].example;
-        let synonyms = wordData[0].meanings[0].definitions[0].synonyms;
         
-    
 
-        console.log(`Definition: ${definition} \n Example: ${example} \n Synonyms: ${synonyms}`)
-        console.log(wordData)
-        // const wordData = await defineWord(word);
-        // const definition = wordData[0].meanings[0].definitions[0].definition;
-        // const example = wordData[0].meanings[0].definitions[0].example;
-        // let synonyms = wordData[0].meanings[0].definitions[0].synonyms;
+        const wordEmbed = new EmbedBuilder()
+            .setColor(global.embedColor)
+            .setTitle(`:book: Definition for ${word}`)
+            .addFields(
+                { name: "Definition", value: definition },
+            )
+            .setTimestamp()    
 
-        // // Convert arrays to a string
-        // if (Array.isArray(synonyms)) {
-        //     synonyms = synonyms.join(', ');
-        // }
-        // if (Array.isArray(example)) {
-        //     example = example.join(', ');
-        // }
-        // if (Array.isArray(definition)) {
-        //     definition = definition.join(', ');
-        // }
-
-        // const wordEmbed = new EmbedBuilder()
-        //     .setColor(global.embedColor)
-        //     .setTitle(`:book: Definition for ${word}`)
-        //     .addFields(
-        //         { name: "Definition", value: definition },
-        //         { name: "Example", value: example },
-        //         { name: "Synonyms", value: synonyms }
-        //     );
-
-
-        // await interaction.reply({ embeds: [wordEmbed] });
+        await interaction.reply({ embeds: [wordEmbed] });
     },
 };
