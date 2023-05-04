@@ -1,5 +1,7 @@
 const { Client, Collection, GatewayIntentBits, Events, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
 
+const Event = require('../models/event.js');
+
 async function eventInteraction(interaction){
     
         if (interaction.customId === 'confirmEvent' && interaction.isButton()) {
@@ -82,7 +84,19 @@ async function eventInteraction(interaction){
                         const reminderJob = schedule.scheduleJob(reminderDate, function () {
                             console.log('Reminder sent')
                         })
-    
+
+                        // Create a new event object
+                        const event = Event.create({
+                            name: interaction.options.getString('name'),
+                            date: date,
+                            reminder: reminderDate,
+                            username: interaction.user.username,
+                            usage_count: 1,
+                        }
+                        
+                        // Add the event to the database
+                        )
+                        console.log(event)
                     })
                 })
             }
