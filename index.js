@@ -8,6 +8,8 @@ const path = require('node:path');
 //dotenv to store enviroment variables
 const { config } = require('dotenv')
 config();
+//connect to database
+const { sequelize } = require('./database.js');
 
 // Creates a new client instance
 const client = new Client({
