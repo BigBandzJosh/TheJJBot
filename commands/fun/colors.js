@@ -1,8 +1,9 @@
-const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, Guild, AttachmentBuilder } = require('discord.js');
 const puppeteer = require('puppeteer')
+const fs = require('fs');
+const { createCanvas, loadImage } = require('canvas');
+const { channel } = require('diagnostics_channel');
 
-// Url to scrape
-const url = 'https://coolors.co/palettes/trending';
 
 
 module.exports = {
@@ -31,25 +32,55 @@ module.exports = {
         }
         const colorCodes = await getColorCodes(); // Call the funtion to get the color codes & store them in a variable
         const colorCodesArray = colorCodes.split(' '); // Split the color codes into an array
-        
+
+        // Function to create emojis of the colors to display to the user
+        async function createEmoji() {
+            try {
+                const canvas = createCanvas(100, 100) // Create a canvas
+                const ctx = canvas.getContext('2d') // Get the 2D rendering context from the canvas object
+
+                // Loop through the color codes array and create a picture for each color code
+                let i = 0;
+                colorCodesArray.forEach(colorCode => {
+                    i = colorCodesArray.indexOf(colorCode) + 1;
+                    ctx.fillStyle = `#${colorCode}` // Set the fill color
+                    ctx.fillRect(0, 0, 100, 100) // Fill the rectangle with the color
+
+                    fs.writeFileSync(`./color-imgs/${colorCode}.png`, canvas.toBuffer()) // Write the image to a file (image.png
+                })
+
+            } catch (error) {
+                console.error(error)
+            }
+        }
+        await createEmoji(); // Call the function to create the pictures
+
         // Create a new embed
         const colorEmbed = new EmbedBuilder()
             .setColor(global.embedColor)
             .setTitle(`:art: Color Pallette`)
-        
-        // Loop through the color codes array and add a field for each color code
-        let i = 0;
-        colorCodesArray.forEach(colorCode => {
-            i = colorCodesArray.indexOf(colorCode) + 1;
-            // colorEmbed.addFields(`#${colorCode}`, '\u200B', true);
-            colorEmbed.addFields({ name: `Color #${i}`, value: `#${colorCode} \n`})
+
+
+        await interaction.reply(':art: Generating color pallette...') // Send a message to let the user know the bot is working
+
+        // Loop through all the files in the color-imgs folder
+        fs.readdirSync('./color-imgs').forEach(file => {
+            const path = __dirname + `/../../color-imgs/${file}`; // Get the path to the file
+            const fileName = file.split('.').slice(0, -1).join('.'); // Get the file name without the extension
+
+            // Create a new attachment and embed
+            const fileAttatch = new AttachmentBuilder(path);
+            const colorEmbed = new EmbedBuilder()
+                .setColor(global.embedColor)
+                .setTitle(`:art: ${fileName}`) // Set the title of the embed to the file name (the color code)
+                .setImage(`attachment://${file}`) // Add the image to the embed
+
+
+            interaction.followUp({ embeds: [colorEmbed], files: [fileAttatch]})   // Send the embed // ADD EPHEMERAL: true TO MAKE IT ONLY VISIBLE TO THE USER WHO SENT THE COMMAND
+            
+
+            
         });
-
-        await interaction.reply({ embeds: [colorEmbed] }); // Send the embed
-
-
-
-
     }
 
 };
