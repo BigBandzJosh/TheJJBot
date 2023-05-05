@@ -1,5 +1,6 @@
 const { Client, Collection, GatewayIntentBits, Events, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
 
+
 const Event = require('../models/event.js');
 
 async function eventInteraction(interaction){
@@ -61,7 +62,7 @@ async function eventInteraction(interaction){
     
     
                         // Switch statement to determine the reminder time
-                        let reminderDate;
+                        var reminderDate;
                         switch (i.values[0]) {
                             case '1':
                                 // Create a new date object for the reminder time
@@ -85,18 +86,23 @@ async function eventInteraction(interaction){
                             console.log('Reminder sent')
                         })
 
-                        // Create a new event object
-                        const event = Event.create({
-                            name: interaction.options.getString('name'),
+                        // add to the database
+                        await Event.create({
+                            name: 'event',
                             date: date,
                             reminder: reminderDate,
                             username: interaction.user.username,
-                            usage_count: 1,
+                            usage_count: 0
+
+                        }).then(event => {
+                            console.log(event.toJSON());
                         }
+                        ).catch(error => {
+                            console.log(error);
+
+                        })
                         
-                        // Add the event to the database
-                        )
-                        console.log(event)
+                        
                     })
                 })
             }

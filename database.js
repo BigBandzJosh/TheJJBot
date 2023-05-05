@@ -21,9 +21,12 @@ sequelize.sync();
     }
 })();
 
-//export the sequelize object
-module.exports = sequelize;
+const models = {
+    sequelize: sequelize,
+    Event: require('./models/event')(sequelize, Sequelize.DataTypes)
+};
 
+module.exports = models;
 
 
 
