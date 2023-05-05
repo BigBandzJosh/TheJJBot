@@ -87,6 +87,7 @@ async function eventInteraction(interaction){
                         })
 
                         // add to the database
+                        // equivalent to: INSERT INTO tags (name, date, reminder, username,usage_count) values (?, ?, ?,?,?) in SQL;
                         await Event.create({
                             name: 'event',
                             date: date,

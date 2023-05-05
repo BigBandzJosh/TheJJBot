@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 
-
+//connect to the database
 const sequelize = new Sequelize({
     host: 'localhost',
     dialect: 'sqlite',
@@ -21,6 +21,8 @@ sequelize.sync();
     }
 })();
 
+
+//export the models, so we can use them in our code
 const models = {
     sequelize: sequelize,
     Event: require('./models/event')(sequelize, Sequelize.DataTypes)
