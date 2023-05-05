@@ -13,9 +13,5 @@ module.exports = {
 
         console.log(`All events: ${JSON.stringify(array)}`);
         await interaction.editReply(`Data fetched!`);
-
-
-        
-
     },
 };
