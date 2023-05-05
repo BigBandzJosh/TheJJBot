@@ -1,5 +1,6 @@
-const {Event} = require('../..//models/event.js');
+const sequelize =require('../../database.js');
 const { SlashCommandBuilder } = require('discord.js');
+const {Event} = require('../../models/event.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -7,8 +8,14 @@ module.exports = {
         .setDescription('Replies with data from database!'),
     async execute(interaction) {
         await interaction.reply(`Fetching data...`);
-        const events = await Event.findAll({ attributes: ['name']});
-        await interaction.editReply(`Found ${events.length} events!`);
+        
+        const array = await Event.findAll();
+
+        console.log(`All events: ${JSON.stringify(array)}`);
+        await interaction.editReply(`Data fetched!`);
+
+
+        
 
     },
 };

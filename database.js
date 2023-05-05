@@ -9,7 +9,7 @@ const sequelize = new Sequelize({
 });
 
 //sync the database
-sequelize.sync();
+  sequelize.sync();
 
 //test the connection
 (async () => {
@@ -23,12 +23,12 @@ sequelize.sync();
 
 
 //export the models, so we can use them in our code
-const models = {
-    sequelize: sequelize,
-    Event: require('./models/event')(sequelize, Sequelize.DataTypes)
-};
 
-module.exports = models;
+module.exports ={ Event: require('./models/event.js')(sequelize, Sequelize.DataTypes)};
+
+module.exports = {sequelize: sequelize};
+
+
 
 
 
