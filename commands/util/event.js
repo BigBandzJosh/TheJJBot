@@ -1,7 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle, ButtonBuilder, ButtonStyle } = require('discord.js');
-const {Event} = require('../../models/event.js');
-const {reminderDate, date} = require('../../index.js');
 
 
 module.exports = {
@@ -35,7 +33,6 @@ module.exports = {
 
         async eventInteraction(interaction){
             if(global.isEventConfirm){
-
                 await interaction.reply(`Event ${interaction.options.getString("eventname")} created!`)
             }
         }

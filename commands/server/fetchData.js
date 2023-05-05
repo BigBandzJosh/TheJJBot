@@ -1,4 +1,4 @@
-const {Tags} = require('../../database.js');
+const {Event} = require('../..//models/event.js');
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
@@ -6,11 +6,9 @@ module.exports = {
         .setName('fetch')
         .setDescription('Replies with data from database!'),
     async execute(interaction) {
-        await interaction.reply(`Tags: ${Tags.get('name')}
-        Date: ${Tags.get('date')}
-        Reminder: ${Tags.get('reminder')}
-        Username: ${Tags.get('username')}
-        Usage Count: ${Tags.get('usage_count')}
-        `);
+        await interaction.reply(`Fetching data...`);
+        const events = await Event.findAll({ attributes: ['name']});
+        await interaction.editReply(`Found ${events.length} events!`);
+
     },
 };
