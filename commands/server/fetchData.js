@@ -9,9 +9,13 @@ module.exports = {
     async execute(interaction) {
         await interaction.reply(`Fetching data...`);
         
-        const array = await Event.findAll();
+        
 
-        console.log(`All events: ${JSON.stringify(array)}`);
-        await interaction.editReply(`Data fetched!`);
+         
+        const array = await Event.findAll({
+            attributes: ['name', 'date'],
+        });
+
+        await interaction.editReply(`Event name: ${array[0].name}\nEvent date: ${array[0].date}`);
     },
 };
