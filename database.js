@@ -25,6 +25,7 @@ const sequelize = new Sequelize({
 //export the models, so we can use them in our code
 
 module.exports ={ Event: require('./models/event.js')(sequelize, Sequelize.DataTypes)};
+module.exports ={ CommandUsage: require('./models/commandUsage.js')(sequelize, Sequelize.DataTypes)};
 
 module.exports = {sequelize: sequelize};
 

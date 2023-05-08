@@ -44,5 +44,5 @@ module.exports = (sequelize, DataTypes) => {
         // Other model options go here
     });
 
-   module.exports = {Event};
+   module.exports = Event;
 };
