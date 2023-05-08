@@ -9,7 +9,8 @@ module.exports = {
                 .setDescription("The location to get the weather for.")
                 .setRequired(true)),
     async execute(interaction) {
-        await interaction.deferReply();
+        try{
+            await interaction.deferReply();
         const location = interaction.options.getString("location");
 
         const weather = {};
@@ -37,5 +38,9 @@ module.exports = {
             .setTimestamp()
         
         await interaction.editReply({ embeds: [weatherEmbed] });
+        }catch(error){
+            console.log(error);
+            await interaction.editReply({content: "Please enter a valid location", ephemeral: true});
+        }
     },
 };

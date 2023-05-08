@@ -7,7 +7,8 @@ module.exports = {
         .setName('fetch')
         .setDescription('Replies with data from database!'),
     async execute(interaction) {
-        await interaction.reply(`Fetching data...`);
+        try{
+            await interaction.reply(`Fetching data...`);
         //console log all commands used by the user
         
         const commandUsages = await commandUsage.findAll({
@@ -17,6 +18,10 @@ module.exports = {
         });
         for (const commandUsage of commandUsages) {
             console.log(commandUsage.dataValues);
+        }
+        }catch(error){
+            console.log(error);
+            await interaction.reply({content: "There was an eeor while executing this command!", ephemeral: true});
         }
         
         

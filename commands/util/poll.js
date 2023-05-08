@@ -17,7 +17,8 @@ module.exports = {
                 
         ),
     async execute(interaction) {
-        // Get the poll name
+        try{
+            // Get the poll name
         const pollName = interaction.options.getString("pollquestion");
         // Create the poll embed
         const pollEmbed = new EmbedBuilder()
@@ -74,6 +75,10 @@ module.exports = {
 
         await interaction.editReply({ embeds: [pollResultsEmbed] });
 
+        }catch(error){
+            console.log(error);
+            await interaction.reply({content: "There was an error creating the poll. Please try again.", ephemeral: true});
+        }
 
 
     },

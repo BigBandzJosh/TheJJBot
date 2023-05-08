@@ -11,7 +11,8 @@ module.exports = {
                 .setDescription("The Name of the Event")
                 .setRequired(true)),
     async execute(interaction, client) {
-        const confirmEvent = new ButtonBuilder()
+        try{
+            const confirmEvent = new ButtonBuilder()
             .setCustomId('confirmEvent')
             .setLabel('Confirm Event')
             .setStyle(ButtonStyle.Success)
@@ -28,6 +29,10 @@ module.exports = {
                 content:`Are you sure you want to create an event called ${interaction.options.getString("eventname")}?`, 
                 components: [row]
             })
+        }catch(error){
+            console.log(error);
+            await interaction.reply({content: "There was an error while executing this command!", ephemeral: true});
+        }
 
         },
 

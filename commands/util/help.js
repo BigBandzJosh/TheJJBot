@@ -6,7 +6,8 @@ module.exports = {
         .setName('help')
         .setDescription('Replies with a list of commands'),
     async execute(interaction) {
-        const helpEmbed = new EmbedBuilder()
+        try{
+            const helpEmbed = new EmbedBuilder()
             .setColor(global.embedColor)
             .setTitle('List of available slash commands.')
             .setAuthor({ name: 'TheJJBot', iconURL: 'https://i.imgur.com/AfFp7pu.png' })
@@ -28,8 +29,11 @@ module.exports = {
             }
             helpEmbed.addFields({name: folder, value: commandNames.join('\n'), inline: true});     
         }
-        await
-        interaction.reply({ embeds: [helpEmbed] });
+        await interaction.reply({ embeds: [helpEmbed] });
 
+        }catch(error){
+            console.log(error);
+            await interaction.reply({content: "There was an error while executing this command!", ephemeral: true});
+        }
     },
 };
