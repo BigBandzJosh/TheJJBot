@@ -15,7 +15,9 @@ module.exports = {
                 userId: interaction.user.id,
             },
         });
-        console.log(commandUsages);
+        for (const commandUsage of commandUsages) {
+            console.log(commandUsage.dataValues);
+        }
         
         
        

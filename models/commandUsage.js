@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const CommandUsage = sequelize.define('CommandUsage', {
+    const commandUsage = sequelize.define('CommandUsage', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -23,5 +23,5 @@ module.exports = (sequelize, DataTypes) => {
         // Other model options go here
     });
 
-    module.exports = CommandUsage;
+    module.exports = commandUsage;
 }
