@@ -15,20 +15,20 @@ module.exports = {
 
 			try {
 				await command.execute(interaction);
-				const [usage, created ]= await commandUsage.findOrCreate({ 
-					where: { 
+				const [usage, created] = await commandUsage.findOrCreate({
+					where: {
 						userId: interaction.user.id,
-						commandName: interaction.commandName, 
-				},
-				defaults: {
-					usageCount: 0,
-				}, 
-				
-			});
-			
+						commandName: interaction.commandName,
+					},
+					defaults: {
+						usageCount: 0,
+					},
+
+				});
+
 				if (created) {
 					await commandUsage.update({
-						usageCount:usage.usageCount + 1,
+						usageCount: usage.usageCount + 1,
 					}, {
 						where: {
 							userId: interaction.user.id,
@@ -39,14 +39,14 @@ module.exports = {
 				} else {
 					console.log(`Incremented usage for ${interaction.commandName}`);
 					await commandUsage.update({
-						usageCount:usage.usageCount + 1,
+						usageCount: usage.usageCount + 1,
 					}, {
 						where: {
 							userId: interaction.user.id,
 							commandName: interaction.commandName,
 						},
 					});
-					
+
 
 				}
 
@@ -58,6 +58,6 @@ module.exports = {
 			// respond to the button
 		} else if (interaction.isStringSelectMenu()) {
 			// respond to the select menu
-		} 
-  },
+		}
+	},
 };

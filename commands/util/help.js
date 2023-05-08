@@ -26,19 +26,9 @@ module.exports = {
                     console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
                 }
             }
-            helpEmbed.addFields({name: folder, value: commandNames.join('\n'), inline: true});
-            
-            
-            // console.log(folder);
-            // console.log(commandNames);
-            
+            helpEmbed.addFields({name: folder, value: commandNames.join('\n'), inline: true});     
         }
         await
-
-                
-
-
-
         interaction.reply({ embeds: [helpEmbed] });
 
     },
