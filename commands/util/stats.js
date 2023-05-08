@@ -4,8 +4,8 @@ const userProfile = require('../../models/userProfile.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName('profile')
-        .setDescription('Displays your server profile!'),
+        .setName('stats')
+        .setDescription('Displays your message & commanmd statistics'),
     async execute(interaction) {
         try{
             // Get userId & check if user has a profile
