@@ -9,6 +9,7 @@ const path = require('node:path');
 const { config } = require('dotenv')
 config();
 //connect to database
+//DO NOT remove the line below, even though sequelize is not used in this file, it is used in other files and is needed in the index.js to connect to the database
 const { sequelize } = require('./database.js');
 
 // Creates a new client instance
