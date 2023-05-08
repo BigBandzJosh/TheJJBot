@@ -5,7 +5,8 @@ module.exports = {
         .setName('flip')
         .setDescription('Flips a coin'),
     async execute(interaction) {
-        // Pick a number between 1 and 2
+        try{
+            // Pick a number between 1 and 2
         let num = Math.floor(Math.random() * 2) + 1;
         // If the number is 1, it's heads. If it's 2, it's tails.
         let result = num === 1 ? 'Heads' : 'Tails';
@@ -15,5 +16,9 @@ module.exports = {
             .setTitle(`:coin: You flipped ${result}!`)
         
             await interaction.reply({ embeds: [flipEmbed] });
+        }catch(error){
+            console.log(error);
+            await interaction.reply({content: "There was an eeor while executing this command!", ephemeral: true});
+        }
     },
 };

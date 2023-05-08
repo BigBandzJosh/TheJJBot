@@ -10,7 +10,8 @@ module.exports = {
                 .setRequired(true)),
 
     async execute(interaction) {
-        const word = interaction.options.getString("word")
+        try{
+            const word = interaction.options.getString("word")
         console.log(word)
         async function defineWord(word) {
             if (typeof word !== 'string') {
@@ -39,5 +40,9 @@ module.exports = {
             .setTimestamp()    
 
         await interaction.reply({ embeds: [wordEmbed] });
+        }catch(error){
+            console.log(error);
+            await interaction.reply({content: "Please enter a valid word", ephemeral: true});
+        }
     },
 };

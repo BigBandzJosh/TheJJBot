@@ -14,7 +14,8 @@ module.exports = {
                 .setDescription("The Name of the Event")
                 .setRequired(true)),
     async execute(interaction, client) {
-        const confirmEvent = new ButtonBuilder()
+        try{
+            const confirmEvent = new ButtonBuilder()
             .setCustomId('confirmEvent')
             .setLabel('Confirm Event')
             .setStyle(ButtonStyle.Success)
@@ -36,7 +37,6 @@ module.exports = {
                 content:`Are you sure you want to create an event called ${eventTitleName}?`, 
                 components: [row],   
             })
-            console.log(eventTitleName);
 
         },
 

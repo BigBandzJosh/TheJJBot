@@ -5,7 +5,8 @@ module.exports = {
         .setName('roll')
         .setDescription('Rolls a dice'),
     async execute(interaction) {
-        // Pick a number between 1 and 6
+        try{
+            // Pick a number between 1 and 6
         let num = Math.floor(Math.random() * 6) + 1;
 
         const rollEmbed = new EmbedBuilder()
@@ -13,5 +14,9 @@ module.exports = {
             .setTitle(`:game_die: You rolled a ${num}!`)
 
         await interaction.reply({ embeds: [rollEmbed] });
+        }catch(error){
+            console.log(error);
+            await interaction.reply({content: "There was an eeor while executing this command!", ephemeral: true});
+        }
     },
 };

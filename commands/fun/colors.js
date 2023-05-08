@@ -11,7 +11,8 @@ module.exports = {
         .setName('color')
         .setDescription('Generates a color pallette'),
     async execute(interaction) {
-        // Function to get color codes
+        try{
+            // Function to get color codes
         async function getColorCodes() {
             try {
                 const browser = await puppeteer.launch({ // Launch new instance of headless chrome
@@ -81,6 +82,10 @@ module.exports = {
 
             
         });
+        }catch(error){
+            console.log(error);
+            await interaction.reply({content: "There was an error while executing this command!", ephemeral: true});
+        }
     }
 
 };
