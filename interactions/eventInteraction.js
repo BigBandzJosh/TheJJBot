@@ -3,6 +3,8 @@ const { Client, Collection, GatewayIntentBits, Events, EmbedBuilder, StringSelec
 
 const Event = require('../models/event.js');
 
+const eventTitleName = require('../commands/util/event.js');
+
 async function eventInteraction(interaction){
     
         if (interaction.customId === 'confirmEvent' && interaction.isButton()) {
@@ -89,11 +91,10 @@ async function eventInteraction(interaction){
                         // add to the database
                         // equivalent to: INSERT INTO tags (name, date, reminder, username,usage_count) values (?, ?, ?,?,?) in SQL;
                         await Event.create({
-                            name: 'event',
+                            name: global.eventTitleName,
                             date: date,
                             reminder: reminderDate,
                             username: interaction.user.username,
-                            usage_count: 0
 
                         }).then(event => {
                             console.log(event.toJSON());

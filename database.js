@@ -9,7 +9,8 @@ const sequelize = new Sequelize({
 });
 
 //sync the database
-  sequelize.sync();
+//add {force: true} to drop the tables and recreate them
+sequelize.sync();
 
 //test the connection
 (async () => {

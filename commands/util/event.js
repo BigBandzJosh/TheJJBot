@@ -2,6 +2,9 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle, ButtonBuilder, ButtonStyle } = require('discord.js');
 
 
+
+
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('event')
@@ -24,10 +27,16 @@ module.exports = {
         const row = new ActionRowBuilder()
             .addComponents(confirmEvent, cancelEvent)
 
+           
+
+            global.eventTitleName = interaction.options.getString("eventname");
+            
+            console.log(eventTitleName);
             await interaction.reply({
-                content:`Are you sure you want to create an event called ${interaction.options.getString("eventname")}?`, 
-                components: [row]
+                content:`Are you sure you want to create an event called ${eventTitleName}?`, 
+                components: [row],   
             })
+            console.log(eventTitleName);
 
         },
 
@@ -37,6 +46,7 @@ module.exports = {
             }
         }
     }
+
         
 
             

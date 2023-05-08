@@ -1,4 +1,4 @@
-const sequelize =require('../../database.js');
+// This command is used to fetch data from the database
 const { SlashCommandBuilder } = require('discord.js');
 const commandUsage = require('../../models/commandUsage.js');
 
