@@ -75,6 +75,11 @@ client.on('guildMemberAdd', async member => {
     await welcomeInteraction(member, client);
 })
 
+// Message create interaction
+const { messageCreate } = require('./interactions/messageCreate');
+client.on('messageCreate', async message => {
+    await messageCreate(message, client);
+})
 
 // Login to Discord with your client's token
 client.login(process.env.DiscordAPI);

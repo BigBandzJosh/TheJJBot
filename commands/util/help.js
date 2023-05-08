@@ -15,7 +15,7 @@ module.exports = {
             .setTimestamp()
         // Loop through the commands folder and the sub folders to get all the command names and add them to the embed
         const commandFolders = fs.readdirSync(path.join(__dirname, '../')).filter(file => fs.statSync(path.join(__dirname, '../', file)).isDirectory());
-        for (const folder of commandFolders) {
+        for (let folder of commandFolders) {
             const commandsPath = path.join(__dirname, '../', folder);
             const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
             let commandNames = [];
@@ -27,6 +27,11 @@ module.exports = {
                     console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
                 }
             }
+            // Capitalize the folder name at the first letter
+            folder = folder.charAt(0).toUpperCase() + folder.slice(1);
+            // Add a "/" before each command name
+            commandNames = commandNames.map(commandName => `/${commandName}`);
+        
             helpEmbed.addFields({name: folder, value: commandNames.join('\n'), inline: true});     
         }
         await interaction.reply({ embeds: [helpEmbed] });
