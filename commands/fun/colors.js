@@ -78,9 +78,7 @@ module.exports = {
 
 
             interaction.followUp({ embeds: [colorEmbed], files: [fileAttatch]})   // Send the embed // ADD EPHEMERAL: true TO MAKE IT ONLY VISIBLE TO THE USER WHO SENT THE COMMAND
-            
-
-            
+                
         });
         }catch(error){
             console.log(error);

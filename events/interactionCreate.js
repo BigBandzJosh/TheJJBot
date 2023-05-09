@@ -48,11 +48,7 @@ module.exports = {
 							commandName: interaction.commandName,
 						},
 					});
-
-
 				}
-
-
 				// Update the userProfile table
 				const isUserCreated = await userProfile.findOne({ // check if user has a profile
 					where: {
@@ -76,16 +72,9 @@ module.exports = {
 							},
 						});
 					}
-
-					
-
 				} else if (!isUserCreated) {
 					return;
-				}
-
-			
-
-
+				}	
 			} catch (error) {
 			console.error(`Error executing ${interaction.commandName}`);
 			console.error(error);
