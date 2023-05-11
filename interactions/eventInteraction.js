@@ -25,6 +25,10 @@ async function eventInteraction(interaction){
                     // Parse the user inputted date to a date object
                     const date = new Date(Date.parse(m.content));
                     console.log(date)
+
+                    // Get the channelID to send the event reminder to
+                    const channelID = interaction.channel.id;
+
                     // Send a message asking the user for the event reminder times
                     const reminderSelect = new StringSelectMenuBuilder()
                         .setCustomId('reminderSelect')
@@ -83,13 +87,28 @@ async function eventInteraction(interaction){
                                 reminderDate = new Date(date.getTime() - 259200000);
                                 break;
                         }
-                        const testDate = '2023-05-03T12:10:00.000Z'
-                        const testReminder = '2023-05-03T12:15:00.000Z'
+
                         const eventJob = schedule.scheduleJob(date, function () {
-                            console.log('Event is happening today')
+                            const embed = new EmbedBuilder()
+                                .setColor(global.embedColor)
+                                .setTitle(`:tada: ${global.eventTitleName} is today!`)
+                                .addFields({
+                                    name: 'Ping',
+                                    value: `${date.toDateString()} @everyone`,
+                                    inline: true
+                                })
+                                channelID.send({ embeds: [embed] })
                         })
                         const reminderJob = schedule.scheduleJob(reminderDate, function () {
-                            console.log('Reminder sent')
+                            const embed = new EmbedBuilder()
+                                .setColor(global.embedColor)
+                                .setTitle(`:tada: ${global.eventTitleName} is in ${i.values[0]} day(s)!`)
+                                .addFields({
+                                    name: 'Ping',
+                                    value: `${date.toDateString()} @everyone`,
+                                    inline: true
+                                })
+                                channelID.send({ embeds: [embed] })
                         })
 
                         // add to the database
@@ -99,6 +118,7 @@ async function eventInteraction(interaction){
                             date: date,
                             reminder: reminderDate,
                             username: interaction.user.username,
+                            channelID: channelID,
 
                         }).then(event => {
                             console.log(event.toJSON());
