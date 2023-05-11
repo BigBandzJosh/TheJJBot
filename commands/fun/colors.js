@@ -56,29 +56,37 @@ module.exports = {
         }
         await createEmoji(); // Call the function to create the pictures
 
-        // Create a new embed
-        const colorEmbed = new EmbedBuilder()
-            .setColor(global.embedColor)
-            .setTitle(`:art: Color Pallette`)
-
-
-        await interaction.reply(':art: Generating color pallette...') // Send a message to let the user know the bot is working
+    
+        await interaction.reply({content: ":art: Generating color pallette", ephemeral: true}) // Send a message to let the user know the bot is working
 
         // Loop through all the files in the color-imgs folder
         fs.readdirSync('./color-imgs').forEach(file => {
+            // Skip all .gitkeep files
+            if (file === '.gitkeep') return;
+
             const path = __dirname + `/../../color-imgs/${file}`; // Get the path to the file
             const fileName = file.split('.').slice(0, -1).join('.'); // Get the file name without the extension
 
             // Create a new attachment and embed
             const fileAttatch = new AttachmentBuilder(path);
-            const colorEmbed = new EmbedBuilder()
-                .setColor(global.embedColor)
-                .setTitle(`:art: ${fileName}`) // Set the title of the embed to the file name (the color code)
-                .setImage(`attachment://${file}`) // Add the image to the embed
+            // const colorEmbed = new EmbedBuilder()
+            //     .setColor(global.embedColor)
+            //     .setTitle(`:art: ${fileName}`) // Set the title of the embed to the file name (the color code)
+            //     .setImage(`attachment://${file}`) // Add the image to the embed
 
 
-            interaction.followUp({ embeds: [colorEmbed], files: [fileAttatch]})   // Send the embed // ADD EPHEMERAL: true TO MAKE IT ONLY VISIBLE TO THE USER WHO SENT THE COMMAND
+            // interaction.followUp({ embeds: [colorEmbed], files: [fileAttatch]})   // Send the embed // ADD EPHEMERAL: true TO MAKE IT ONLY VISIBLE TO THE USER WHO SENT THE COMMAND
+              interaction.followUp({ files: [fileAttatch], ephemeral: true})  
+
+            
+              // Wait 1 second 
+            setTimeout(() => {
+                // Delete the file
+                fs.unlinkSync(path);
+            }
+                , 1000)
                 
+
         });
         }catch(error){
             console.log(error);
