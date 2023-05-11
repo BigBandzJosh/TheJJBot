@@ -10,12 +10,12 @@ module.exports = {
         try{
             // Get userId & check if user has a profile
             const userId = interaction.user.id;
-            const isUserCreated = await userProfile.findOne({
+            //findOrCreate acts as a check to see if the user has a profile
+            const isUserCreated = await userProfile.findOrCreate({
                 where: {
                     userId: userId,
                 },
             });
-
             if(isUserCreated){ // if user has a profile
                 console.log("User has a profile");
                 // do something
