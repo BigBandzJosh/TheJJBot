@@ -18,6 +18,10 @@ async function eventInteraction(interaction){
                 // When the user replies, console log their response
                 collector.on('collect', m => {
                     console.log(m.content)
+                    if(!m.content.match(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/)){
+                        interaction.followUp({ content: "Please enter a valid date in the format of: `DD/MM/YYYY`", ephemeral: true })
+                        return;
+                    }
                     // Parse the user inputted date to a date object
                     const date = new Date(Date.parse(m.content));
                     console.log(date)
