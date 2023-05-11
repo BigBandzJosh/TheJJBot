@@ -16,7 +16,6 @@ module.exports = {
 
             const userEvents = await Event.findAll({
                 where: {
-                    name: global.eventTitleName = interaction.options.getString("eventname"),
                     username: interaction.user.username,
                     
                 },

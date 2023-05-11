@@ -10,23 +10,19 @@ module.exports = {
         try{
             await interaction.reply(`Fetching data...`);
         //console log all commands used by the user
-        
         const commandUsages = await commandUsage.findAll({
             where: {
                 userId: interaction.user.id,
             },
         });
+        await interaction.editReply(`Data fetched!`);
         for (const commandUsage of commandUsages) {
             console.log(commandUsage.dataValues);
         }
+
         }catch(error){
             console.log(error);
-            await interaction.reply({content: "There was an eeor while executing this command!", ephemeral: true});
-        }
-        
-        
-       
-         
-        
+            await interaction.reply({content: "There was an error while executing this command!", ephemeral: true});
+        }  
     },
 };
