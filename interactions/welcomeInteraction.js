@@ -1,4 +1,4 @@
-const { Client, Collection, GatewayIntentBits, Events, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
+const {EmbedBuilder} = require('discord.js');
 
 async function welcomeInteraction(member, client){
     const guild = client.guilds.cache.get(member.guild.id); // Get the guild the member joined

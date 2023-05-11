@@ -1,9 +1,7 @@
-const { Client, Collection, GatewayIntentBits, Events, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
-
-
+const {StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
 const Event = require('../models/event.js');
 
-const eventTitleName = require('../commands/util/event.js');
+
 
 async function eventInteraction(interaction){
     

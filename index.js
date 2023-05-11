@@ -1,5 +1,5 @@
 //Discord bot by: Jaegar and Josh
-const { Client, Collection, GatewayIntentBits, Events, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
+const { Client, Collection, GatewayIntentBits } = require('discord.js');
 // Global colour variable
 global.embedColor = '#fa2f6c'
 //fs or file system to read files

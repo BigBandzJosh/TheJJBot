@@ -22,7 +22,6 @@
     "cheerio": "^1.0.0-rc.12",
     "discord.js": "^14.9.0",
     "dotenv": "^16.0.3",
-    "generate-changelog": "^1.8.0",
     "json2csv": "^6.0.0-alpha.2",
     "node-schedule": "^2.1.1",
     "puppeteer": "^20.1.0",

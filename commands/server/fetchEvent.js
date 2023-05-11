@@ -1,5 +1,4 @@
 const {SlashCommandBuilder} = require('discord.js');
-const { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle, ButtonBuilder, ButtonStyle } = require('discord.js');
 const Event = require('../../models/event.js');
 
 module.exports = {
