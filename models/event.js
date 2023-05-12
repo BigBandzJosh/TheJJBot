@@ -36,9 +36,9 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         channelID: {
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
-        }
+        },
     }, {
         // Other model options go here
     });

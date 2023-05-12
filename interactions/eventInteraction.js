@@ -23,7 +23,8 @@ async function eventInteraction(interaction){
                         return;
                     }
                     // Parse the user inputted date to a date object
-                    const date = new Date(Date.parse(m.content));
+                    // const date = new Date(Date.parse(m.content));
+                    const date = new Date('2023-05-12T12:59:17Z');
                     console.log(date)
 
                     // Get the channelID to send the event reminder to
