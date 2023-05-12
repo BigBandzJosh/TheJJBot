@@ -1,4 +1,3 @@
-const { Client, Collection, GatewayIntentBits, Events, EmbedBuilder, StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
 const userProfile = require('../models/userProfile.js');
 async function messageCreate(message){
 

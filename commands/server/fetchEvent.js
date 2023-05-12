@@ -1,5 +1,4 @@
 const {SlashCommandBuilder} = require('discord.js');
-const { ModalBuilder, ActionRowBuilder, TextInputBuilder, TextInputStyle, ButtonBuilder, ButtonStyle } = require('discord.js');
 const Event = require('../../models/event.js');
 
 module.exports = {
@@ -16,7 +15,6 @@ module.exports = {
 
             const userEvents = await Event.findAll({
                 where: {
-                    name: global.eventTitleName = interaction.options.getString("eventname"),
                     username: interaction.user.username,
                     
                 },
