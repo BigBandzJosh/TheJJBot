@@ -54,3 +54,4 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C821D8AE016346E99FBD329C5ED7B25A }}
           package: .
+          env: DiscordAPI=${{ secrets.DiscordAPI }} ClientID=${{ secrets.ClientID }} WeatherAPI=${{ secrets.WeatherAPI }}
