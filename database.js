@@ -10,13 +10,14 @@ const sequelize = new Sequelize({
 
 //sync the database
 //add {force: true} to drop the tables and recreate them
+//if you change the models, you will need to drop the tables and recreate them
 sequelize.sync();
 
 //test the connection
 (async () => {
     try {
         await sequelize.authenticate();
-        console.log('Connection has been established successfully.');
+        console.log(`Connection has been established successfully.`);
     } catch (error) {
         console.error('Unable to connect to the database: ', error);
     }

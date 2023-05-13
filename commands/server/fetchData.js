@@ -1,5 +1,5 @@
 // This command is used to fetch data from the database
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder, bold } = require('discord.js');
 const commandUsage = require('../../models/commandUsage.js');
 
 module.exports = {
@@ -21,14 +21,28 @@ module.exports = {
 
             const date = new Date(commandUsage.dataValues.updatedAt);
             const year = date.getFullYear();
-            const month = ('0' + (date.getMonth() + 1)).slice(-2);
+            const month = date.toLocaleString('default', { month: 'long' });
             const day = ('0' + date.getDate()).slice(-2);
             const hour = ('0' + date.getHours()).slice(-2);
             const minute = ('0' + date.getMinutes()).slice(-2);
             const ampm = hour < 12 ? 'AM' : 'PM';
-            const formattedDate = `${year}/${month}/${day} ${hour % 12}:${minute}${ampm}`;
+            const formattedDate = `${year}-${month}-${day} || ${hour % 12}:${minute}${ampm}`;
+
+           
+
+            const commandDataEmbed = new EmbedBuilder()
+                .setColor(global.embedColor)
+                .setTitle(`Command Usage Data`)
+                .setAuthor({ name: 'TheJJBot', iconURL: 'https://i.imgur.com/AfFp7pu.png' })
+                .setThumbnail('https://i.imgur.com/AfFp7pu.png')
+                .setDescription(`CommandName:  ${commandUsage.dataValues.commandName}\n\nCommandUsage:  ${commandUsage.dataValues.usageCount}\n\nlastUsed: ${formattedDate}`)
+                .setTimestamp();
+
+
+
+
             
-            await interaction.followUp(`Commandname: ${commandUsage.dataValues.commandName}\nCommandUsage: ${commandUsage.dataValues.usageCount}\nlastUsed: ${formattedDate}`);
+            await interaction.followUp( { embeds: [commandDataEmbed] });
         }
 
         }catch(error){

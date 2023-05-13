@@ -1,4 +1,4 @@
-const {SlashCommandBuilder} = require('discord.js');
+const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -7,7 +7,23 @@ module.exports = {
     async execute(interaction) {
         try{
             await interaction.reply(`Fetching changelog...`);
-            await interaction.editReply(`Must implement this feature!`);
+
+            const changelogEmbed = new EmbedBuilder()
+                .setColor(global.embedColor)
+                .setTitle(`Changelog`)
+                .setAuthor({ name: 'TheJJBot', iconURL: 'https://i.imgur.com/AfFp7pu.png' })
+                .setThumbnail('https://i.imgur.com/AfFp7pu.png')
+                .setDescription("Must implement this feature!")
+                .setTimestamp();
+
+
+            await interaction.editReply({ embeds: [changelogEmbed] });
+
+
+            
+
+           
+
         }catch(error){
             console.log(error);
             await interaction.reply({content: "There was an error while executing this command!", ephemeral: true});
