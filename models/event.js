@@ -2,6 +2,7 @@
 
 //equivalent to a table in the database
 //CREATE TABLE Events (
+//id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 //    name VARCHAR(255) NOT NULL,
 //    date DATE NOT NULL,
 //    reminder INT NOT NULL,
