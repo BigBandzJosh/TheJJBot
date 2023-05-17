@@ -20,10 +20,11 @@ module.exports = {
         //const url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.WeatherAPI}&units=metric`;
         //const url = `http://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=${process.env.WeatherAPI}&units=metric`;
 
-        const url = ` http://api.weatherapi.com/v1/forecast.json?key=${process.env.WeatherAPI}&q=${location}&aqi=yes&alerts=no`
+        const url = ` http://api.weatherapi.com/v1/forecast.json?key=${process.env.WeatherAPI}&q=${location}&aqi=no&alerts=no`
 
         const response = await fetch(url);
         const data = await response.json();
+        console.log(data);
 
         weather.temperature = {
             value: data.current.temp_c,
@@ -44,12 +45,13 @@ module.exports = {
         weather.icon = data.current.condition.icon;
         weather.description = data.current.condition.text;
         weather.city = data.location.name;
+        weather.region = data.location.region;
         weather.country = data.location.country;
         weather.currentTime = data.current.last_updated;
 
         const weatherEmbed = new EmbedBuilder()
             .setColor(global.embedColor)
-            .setTitle(`Weather for ${weather.city}, ${weather.country}`)
+            .setTitle(`Weather for ${weather.city}, ${weather.region}, ${weather.country}`)
             .setDescription(`**${weather.description}** | As of: ${weather.currentTime}`)
             .setThumbnail(`https:${weather.icon}`)
             .addFields(
