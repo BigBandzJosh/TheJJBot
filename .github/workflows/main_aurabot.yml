@@ -52,5 +52,5 @@ jobs:
         with:
           app-name: 'AuraBot'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_96621F1149B14F24881BAF48D0C4C791 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_703DE88928504F92B1BB2A17A6A913E2 }}
           package: .
