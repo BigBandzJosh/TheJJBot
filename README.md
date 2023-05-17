@@ -4,9 +4,9 @@ Welcome to TheJJBot! This is a Discord bot that is used to provide a few fun com
 
 # Table of Contents
 1. [Installation](#installation)
-2. [Usage](#usage)
-3. [Contributing](#contributing)
-4. [Credits](#credits)
+    1. [Requirements](#requirements)
+    2. [Setup](#setup)
+
 
 ## Installation
 ### Requirements
@@ -24,5 +24,6 @@ DiscordAPI=YOUR_DISCORD_BOT_TOKEN
 ClientID=YOUR_DISCORD_CLIENT_ID
 ```
 5. Run `npm start` to start the bot
+
 
 
