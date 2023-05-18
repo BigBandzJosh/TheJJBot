@@ -7,6 +7,13 @@ async function welcomeInteraction(member, client){
     const welcomeEmbed = new EmbedBuilder()
         .setColor(global.embedColor)
         .setTitle(`:wave: Welcome ${member.user.username}!`)
+        .setDescription(`Welcome to ${guild.name}!`)
+        .setThumbnail(`${member.user.displayAvatarURL()}`)
+        .addFields(
+            { name: "Member Count", value: `${guild.memberCount}`, inline: true },
+            { name: "Member Joined", value: `${member.joinedAt}`, inline: true },
+            { name: "Account Created", value: `${member.user.createdAt}`, inline: true },
+        )
 
     await channel.send({ embeds: [welcomeEmbed] }); // Send the embed to the system channel
 }

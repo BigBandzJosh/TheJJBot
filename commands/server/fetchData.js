@@ -14,36 +14,26 @@ module.exports = {
                 userId: interaction.user.id,
             },
         });
+
+        
         if (commandUsages.length === 0) {
             await interaction.editReply(`No commands used yet!`);
         }
-        for (const commandUsage of commandUsages) {
 
-            const date = new Date(commandUsage.dataValues.updatedAt);
-            const year = date.getFullYear();
-            const month = date.toLocaleString('default', { month: 'long' });
-            const day = ('0' + date.getDate()).slice(-2);
-            const hour = ('0' + date.getHours()).slice(-2);
-            const minute = ('0' + date.getMinutes()).slice(-2);
-            const ampm = hour < 12 ? 'AM' : 'PM';
-            const formattedDate = `${year}-${month}-${day} || ${hour % 12}:${minute}${ampm}`;
-
-           
-
-            const commandDataEmbed = new EmbedBuilder()
+        const embedBuilder = new EmbedBuilder()
                 .setColor(global.embedColor)
                 .setTitle(`Command Usage Data`)
                 .setAuthor({ name: 'TheJJBot', iconURL: 'https://i.imgur.com/AfFp7pu.png' })
                 .setThumbnail('https://i.imgur.com/AfFp7pu.png')
-                .setDescription(`CommandName:  ${commandUsage.dataValues.commandName}\n\nCommandUsage:  ${commandUsage.dataValues.usageCount}\n\nlastUsed: ${formattedDate}`)
+                .setDescription(`Command usage data for ${interaction.user.username}`)
+                .addFields(
+                    { name: "Command Name", value: `${commandUsages.map(commandUsage => commandUsage.commandName).join('\n')}`, inline: true },
+                    { name: "Usage Count", value: `${commandUsages.map(commandUsage => commandUsage.usageCount).join('\n')}`, inline: true },  
+                )
                 .setTimestamp();
+                await interaction.editReply({ embeds: [embedBuilder] });
 
-
-
-
-            
-            await interaction.followUp( { embeds: [commandDataEmbed] });
-        }
+               
 
         }catch(error){
             console.log(error);

@@ -11,7 +11,12 @@ module.exports = {
             .setTitle(`Server Info`)
             .setAuthor({ name: 'TheJJBot', iconURL: 'https://i.imgur.com/AfFp7pu.png' })
             .setThumbnail(interaction.guild.iconURL({ dynamic: true }))
-            .setDescription(`Server name: ${interaction.guild.name}\n\nTotal members: ${interaction.guild.memberCount}\n\nServer created: ${interaction.guild.createdAt}\n\nServer icon: ${interaction.guild.iconURL({ dynamic: true })}`)
+            .setDescription(`Server info for ${interaction.guild.name}`)
+            .addFields(
+                { name: "Server Name", value: `${interaction.guild.name}`, inline: true },
+                { name: "Server ID", value: `${interaction.guild.id}`, inline: true },
+                { name: "Server Owner", value: `${interaction.guild.owner}`, inline: true },
+            )
             .setTimestamp();
 
 

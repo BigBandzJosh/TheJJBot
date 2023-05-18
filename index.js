@@ -11,6 +11,9 @@ config();
 //connect to database
 //DO NOT remove the line below, even though sequelize is not used in this file, it is used in other files and is needed in the index.js to connect to the database
 const { sequelize } = require('./database.js');
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 8080;
 
 // Creates a new client instance
 const client = new Client({
@@ -81,5 +84,8 @@ client.on('messageCreate', async message => {
     await messageCreate(message, client);
 })
 
+app.listen(port, () => {
+    console.log(`Example app listening at ${port}`)
+});
 // Login to Discord with your client's token
 client.login(process.env.DiscordAPI);

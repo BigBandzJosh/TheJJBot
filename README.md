@@ -1,26 +1,29 @@
-# TheJJBot
-Discord Bot project!
-Yay!
+# TheJJBot Documentation
+Welcome to TheJJBot! This is a Discord bot that is used to provide a few fun commands, and useful things inside your Discord server! This bot is currently in development, it functions as it stands, but it needs work. If you have any suggestions for commands, or to give the bot a specific purpose, please feel free to reach out to me on Github. 
 
-# PACKAGES/MODULES <br/>
-"dependencies": { <br/>
-    "axios": "^1.4.0",<br/>
-    "canvas": "^2.11.2",<br/>
-    "cheerio": "^1.0.0-rc.12",<br/>
-    "discord.js": "^14.9.0",<br/>
-    "dotenv": "^16.0.3",<br/>
-    "json2csv": "^6.0.0-alpha.2",<br/>
-    "node-schedule": "^2.1.1",<br/>
-    "puppeteer": "^20.1.0",<br/>
-    "sequelize": "^6.31.1",<br/>
-    "sqlite3": "^5.1.6"<br/>
-  }
 
-# START THE BOT <br/>
-npm run dev
-# CREATE NEW COMMAND: <br/>
+# Table of Contents
+1. [Installation](#installation)
+    1. [Requirements](#requirements)
+    2. [Setup](#setup)
 
-To add a new command to the bot, either create a new folder under the commands folder and name it accordingly, OR add a new .js file to an existing folder and name accordingly. </br>
 
-Run "node deploy-commands.js" to deploy your commands, currently it is set to deploy globally to all servers the bot is in. We can change this if we wanted to set them for one specific server.
+## Installation
+### Requirements
+- Node 18.0.0 or higher
+- NPM 7.0.0 or higher
+- A Discord Bot Token
+
+### Setup
+1. Clone the repository
+2. Run `npm install` to install all dependencies
+3. Create a `.env` file in the root directory of the project
+4. Add the following to the `.env` file:
+```
+DiscordAPI=YOUR_DISCORD_BOT_TOKEN
+ClientID=YOUR_DISCORD_CLIENT_ID
+```
+5. Run `npm start` to start the bot
+
+
 
