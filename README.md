@@ -48,7 +48,8 @@ DiscordAPI=YOUR_DISCORD_BOT_TOKEN
 ClientID=YOUR_DISCORD_CLIENT_ID
 WeatherAPI=YOUR_WEATHER_API_TOKEN
 ```
-5. Run `npm start` to start the bot
+5. Run `node deploy-commands.js` to deploy all of the commands with discord
+6. Finally, run `npm run dev` to start the bot.
 
 
 
