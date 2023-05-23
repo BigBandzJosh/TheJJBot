@@ -6,6 +6,8 @@ module.exports = {
         .setDescription('Replies with server info!'),
     async execute(interaction) {
 
+        const ownerID = await interaction.guild.fetchOwner();
+
         const serverEmbed = new EmbedBuilder()
             .setColor(global.embedColor)
             .setTitle(`Server Info`)
@@ -15,7 +17,7 @@ module.exports = {
             .addFields(
                 { name: "Server Name", value: `${interaction.guild.name}`, inline: true },
                 { name: "Server ID", value: `${interaction.guild.id}`, inline: true },
-                { name: "Server Owner", value: `${interaction.guild.owner}`, inline: true },
+                { name: "Server Owner", value: `${ownerID}`, inline: true },
             )
             .setTimestamp();
 

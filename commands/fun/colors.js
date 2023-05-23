@@ -78,7 +78,6 @@ module.exports = {
             // interaction.followUp({ embeds: [colorEmbed], files: [fileAttatch]})   // Send the embed // ADD EPHEMERAL: true TO MAKE IT ONLY VISIBLE TO THE USER WHO SENT THE COMMAND
               interaction.followUp({ files: [fileAttatch], ephemeral: true})  
 
-            
               // Wait 1 second 
             setTimeout(() => {
                 // Delete the file

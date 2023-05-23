@@ -1,10 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const {ActionRowBuilder,ButtonBuilder, ButtonStyle } = require('discord.js');
 
-
-
-
-
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('event')
@@ -28,8 +24,6 @@ module.exports = {
         const row = new ActionRowBuilder()
             .addComponents(confirmEvent, cancelEvent)
 
-           
-
             global.eventTitleName = interaction.options.getString("eventname");
             
             console.log(eventTitleName);
@@ -44,7 +38,6 @@ module.exports = {
             await interaction.reply({content: "There was an error while executing this command!", ephemeral: true});
         }
     },
-
 
         async eventInteraction(interaction){
             if(global.isEventConfirm){
