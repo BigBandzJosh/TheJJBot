@@ -1,7 +1,7 @@
 # TheJJBot Documentation
-> Welcome to TheJJBot! This is a Discord bot that is used to provide a few fun commands, and useful things inside your Discord server! This bot is currently in
-> development, it functions as it stands, but it needs work. If you have any suggestions for commands, or to give the bot a specific purpose, please feel free to 
-> reach out to us on Github. 
+Welcome to TheJJBot! This is a Discord bot that is used to provide a few fun commands, and useful things inside your Discord server! This bot is currently in
+development, it functions as it stands, but it needs work. If you have any suggestions for commands, or to give the bot a specific purpose, please feel free to 
+reach out to us on Github. 
 
 
 # Table of Contents
