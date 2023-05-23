@@ -1,5 +1,6 @@
 const {StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const Event = require('../models/event.js');
+const event = require('../commands/util/event.js');
 
 
 
@@ -121,12 +122,24 @@ async function eventInteraction(interaction){
                             channelID: channelID,
 
                         }).then(() => {
-                            console.log('Created an event')
-                        }
-                        ).catch(err => {
-                            console.log('Error creating an event', err)
+                            //pull the created at and updated at times from the database
+                            Event.findOne({
+                                where: {
+                                    name: global.eventTitleName,
+                                    date: date,
+                                    reminder: reminderDate, 
+                                    username: interaction.user.username,
+                                    channelID: channelID,
+                                },
+                            }).then(event => {
+                                console.log('Created event', event.dataValues.createdAt, event.dataValues.updatedAt)
+                            }
+                            ).catch(err => {
+                                console.log('Error creating an event', err)
+                            })
                         })
-                        
+
+                         
                         
                     })
                 })

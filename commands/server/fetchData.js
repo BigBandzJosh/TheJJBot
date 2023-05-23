@@ -32,6 +32,7 @@ module.exports = {
                 )
                 .setTimestamp();
                 await interaction.editReply({ embeds: [embedBuilder] });
+                console.log(commandUsages);
 
         }catch(error){
             console.log(error);
