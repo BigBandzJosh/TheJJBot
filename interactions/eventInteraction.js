@@ -1,4 +1,4 @@
-const {StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder } = require('discord.js');
+const {StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const Event = require('../models/event.js');
 
 
@@ -22,11 +22,12 @@ async function eventInteraction(interaction){
                     }
                     // Parse the user inputted date to a date object
                     // const date = new Date(Date.parse(m.content));
-                    const date = new Date('2023-05-12T12:59:17Z');
+                    const date = new Date('2023-05-18T18:39:28.598Z');
                     console.log(date)
 
                     // Get the channelID to send the event reminder to
                     const channelID = interaction.channel.id;
+                    console.log(channelID)
 
                     // Send a message asking the user for the event reminder times
                     const reminderSelect = new StringSelectMenuBuilder()
