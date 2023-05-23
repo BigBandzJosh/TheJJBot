@@ -13,7 +13,7 @@ const sequelize = new Sequelize({
 //if you change the models, you will need to drop the tables and recreate them
 sequelize.sync();
 
-//test the connection
+//test the connection to see if it works
 (async () => {
     try {
         await sequelize.authenticate();
@@ -28,8 +28,8 @@ sequelize.sync();
 
 module.exports ={ Event: require('./models/event.js')(sequelize, Sequelize.DataTypes)};
 module.exports ={ CommandUsage: require('./models/commandUsage.js')(sequelize, Sequelize.DataTypes)};
-module.exports = { UserProfile: require('./models/userProfile.js')(sequelize, Sequelize.DataTypes)}
-module.exports = { WeatherCollection: require('./models/weatherCollection.js')(sequelize, Sequelize.DataTypes)}
+module.exports ={ UserProfile: require('./models/userProfile.js')(sequelize, Sequelize.DataTypes)}
+module.exports ={ WeatherCollection: require('./models/weatherCollection.js')(sequelize, Sequelize.DataTypes)}
 
 module.exports = {sequelize: sequelize};
 
