@@ -36,15 +36,17 @@ reach out to us on Github.
 - Node 18.0.0 or higher
 - NPM 7.0.0 or higher
 - A Discord Bot Token
+- WeatherAPI.com API Token
 
 ### Setup
 1. Clone the repository
 2. Run `npm install` to install all dependencies
 3. Create a `.env` file in the root directory of the project
 4. Add the following to the `.env` file:
-```
+```env
 DiscordAPI=YOUR_DISCORD_BOT_TOKEN
 ClientID=YOUR_DISCORD_CLIENT_ID
+WeatherAPI=YOUR_WEATHER_API_TOKEN
 ```
 5. Run `npm start` to start the bot
 
