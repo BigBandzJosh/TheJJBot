@@ -9,7 +9,7 @@ async function eventInteraction(interaction) {
     if (interaction.customId === 'confirmEvent' && interaction.isButton()) {
         if (!interaction.replied) {
             // Send a message asking the user for the event date
-            await interaction.reply({ content: "Please enter the date of the event in the format of: `DD/MM/YYYY`", ephemeral: true })
+            await interaction.reply({ content: "Please enter the date of the event in the format of: `YYYY/MM/DD`", ephemeral: true })
             // Create a filter to only allow the user who started the interaction to reply
             const filter = m => m.author.id === interaction.user.id;
             // Create a message collector to collect the user's response
@@ -17,19 +17,20 @@ async function eventInteraction(interaction) {
             // When the user replies, console log their response
             collector.on('collect', m => {
                 console.log(m.content)
-                if (!m.content.match(/^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/)) {
-                    interaction.followUp({ content: "Please enter a valid date in the format of: `DD/MM/YYYY`", ephemeral: true })
+                // Regex to make sure the users date is in the format of YYYY/MM/DD
+                const dateRegex = new RegExp('^[0-9]{4}/[0-9]{2}/[0-9]{2}$');
+                // If the user's response does not match the regex, send a message telling them to try again
+                if (!dateRegex.test(m.content)) {
+                    interaction.followUp({ content: "Invalid Date Format", ephemeral: true })
                     return;
                 }
-                // Parse the user inputted date to a date object
-                // const date = new Date(Date.parse(m.content));
-                const date = new Date('2023-05-18T18:39:28.598Z');
+                // Replace "/" with "-" to make the date object work & parse the date
+                const date = new Date(Date.parse(m.content.replace(/\//g, '-')));
                 console.log(date)
 
-                // Get the channelID to send the event reminder to
-                const channelID = interaction.channel.id;
-                console.log(channelID)
-
+                // Get the channel id of the channel the interaction was started in in the form of a discord.js channel object
+                const channel = interaction.channel;
+                console.log(channel)
                 // Send a message asking the user for the event reminder times
                 const reminderSelect = new StringSelectMenuBuilder()
                     .setCustomId('reminderSelect')
@@ -98,7 +99,7 @@ async function eventInteraction(interaction) {
                                 value: `${date.toDateString()} @everyone`,
                                 inline: true
                             })
-                        channelID.send({ embeds: [embed] })
+                        channel.send({ embeds: [embed] })
                     })
                     const reminderJob = schedule.scheduleJob(reminderDate, function () {
                         const embed = new EmbedBuilder()
@@ -109,7 +110,7 @@ async function eventInteraction(interaction) {
                                 value: `${date.toDateString()} @everyone`,
                                 inline: true
                             })
-                        channelID.send({ embeds: [embed] })
+                        channel.send({ embeds: [embed] })
                     })
 
                     // add to the database
@@ -119,26 +120,33 @@ async function eventInteraction(interaction) {
                         date: date,
                         reminder: reminderDate,
                         username: interaction.user.username,
-                        channelID: channelID,
+                        channelID: channel,
 
-                        }).then(() => {
-                            console.log('Created an event')
-                            \
+                    }).then(() => {
+                        //pull the created at and updated at times from the database
+                        Event.findOne({
+                            where: {
+                                name: global.eventTitleName,
+                                date: date,
+                                reminder: reminderDate, 
+                                username: interaction.user.username,
+                                channelID: channel,
+                            },
+                        }).then(event => {
+                            console.log('Created event', event.dataValues.createdAt, event.dataValues.updatedAt)
                         }
                         ).catch(err => {
                             console.log('Error creating an event', err)
                         })
-                        
-                        
                     })
                 })
-            }
+            })
         } else if (interaction.customId === 'cancelEvent') {
             await interaction.reply({ content: "Event was not created.", ephemeral: true })
         }
     }
 
-
+}
     module.exports = {
         eventInteraction
     };
