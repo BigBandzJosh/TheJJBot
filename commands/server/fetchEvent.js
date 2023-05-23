@@ -5,9 +5,7 @@ module.exports = {
     data: new SlashCommandBuilder()
         .setName('find')
         .setDescription('Find your event'),
-            //It doesn't let you give the name capital letters for some reason
-
-            
+            //It doesn't let you give the name capital letters for some reason   
     async execute(interaction) {
         try {
             await interaction.reply(`Finding event...`);
@@ -17,7 +15,6 @@ module.exports = {
                     username: interaction.user.username,
                     
                 },
-              
             });
             if (userEvents.length > 0) {
                 await interaction.editReply(`Event found!`);
@@ -32,8 +29,7 @@ module.exports = {
                         .setTimestamp();
                     
                     await interaction.followUp({ embeds: [eventEmbed] });
-                }
-                
+                } 
             }
             
             else {

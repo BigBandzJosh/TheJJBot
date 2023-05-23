@@ -16,11 +16,6 @@ module.exports = {
 
         const weather = {};
 
-        
-
-        //const url = `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${process.env.WeatherAPI}&units=metric`;
-        //const url = `http://api.openweathermap.org/data/2.5/forecast?lat=44.34&lon=10.99&appid=${process.env.WeatherAPI}&units=metric`;
-
         const url = ` http://api.weatherapi.com/v1/forecast.json?key=${process.env.WeatherAPI}&q=${location}&aqi=no&alerts=no`
 
         const response = await fetch(url);
