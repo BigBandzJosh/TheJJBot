@@ -29,6 +29,7 @@ sequelize.sync();
 module.exports ={ Event: require('./models/event.js')(sequelize, Sequelize.DataTypes)};
 module.exports ={ CommandUsage: require('./models/commandUsage.js')(sequelize, Sequelize.DataTypes)};
 module.exports = { UserProfile: require('./models/userProfile.js')(sequelize, Sequelize.DataTypes)}
+module.exports = { WeatherCollection: require('./models/weatherCollection.js')(sequelize, Sequelize.DataTypes)}
 
 module.exports = {sequelize: sequelize};
 

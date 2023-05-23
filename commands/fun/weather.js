@@ -1,4 +1,5 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
+const weatherCollection = require("../../models/weatherCollection.js");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -24,7 +25,6 @@ module.exports = {
 
         const response = await fetch(url);
         const data = await response.json();
-        console.log(data);
 
         weather.temperature = {
             value: data.current.temp_c,
@@ -48,6 +48,30 @@ module.exports = {
         weather.region = data.location.region;
         weather.country = data.location.country;
         weather.currentTime = data.current.last_updated;
+
+        //add the weather to the database
+        await weatherCollection.create({
+            latitude: weather.lat,
+            longitude: weather.lon,
+            temperature: weather.temperature.value,
+            feelsLike: weather.feelslike,
+            humidity: weather.humidity,
+            windSpeed: weather.wind,
+            windDirection: weather.winddir,
+            windGust: weather.gust,
+            pressure: weather.pressure,
+            precipitation: weather.precip,
+            uvIndex: weather.uv,
+            visibility: weather.visibility,
+            city: weather.city,
+            province: weather.region,
+            country: weather.country,
+            timezone: weather.currentTime,
+        }).then (() =>{
+            console.log("Weather added to database"); 
+        }).catch(error =>{
+            console.log('Error adding weather to database', error);
+        });
 
         const weatherEmbed = new EmbedBuilder()
             .setColor(global.embedColor)

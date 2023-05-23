@@ -120,12 +120,11 @@ async function eventInteraction(interaction){
                             username: interaction.user.username,
                             channelID: channelID,
 
-                        }).then(event => {
-                            console.log(event.toJSON());
+                        }).then(() => {
+                            console.log('Created an event')
                         }
-                        ).catch(error => {
-                            console.log(error);
-
+                        ).catch(err => {
+                            console.log('Error creating an event', err)
                         })
                         
                         
