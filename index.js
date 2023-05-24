@@ -26,6 +26,10 @@ const client = new Client({
     ],
 });
 
+// Creates a new collection for commands
+
+
+
 
 //Creates a new collection for commands
 client.commands = new Collection();
@@ -89,3 +93,5 @@ app.listen(port, () => {
 });
 // Login to Discord with your client's token
 client.login(process.env.DiscordAPI);
+
+module.exports = client;

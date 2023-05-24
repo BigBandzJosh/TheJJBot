@@ -1,6 +1,7 @@
 const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder, ActionRowBuilder, EmbedBuilder } = require('discord.js');
 const Event = require('../models/event.js');
 const event = require('../commands/util/event.js');
+const client = require('../index.js');
 
 
 
@@ -25,12 +26,14 @@ async function eventInteraction(interaction) {
                     return;
                 }
                 // Replace "/" with "-" to make the date object work & parse the date
-                const date = new Date(Date.parse(m.content.replace(/\//g, '-')));
+                // const date = new Date(Date.parse(m.content.replace(/\//g, '-')));
+                const testdate = '2023-05-24T16:00:12.416Z'
+                const date = new Date(Date.parse(testdate.replace(/\//g, '-')));
                 console.log(date)
 
                 // Get the channel id of the channel the interaction was started in in the form of a discord.js channel object
                 const channel = interaction.channel;
-                console.log(channel)
+                
                 // Send a message asking the user for the event reminder times
                 const reminderSelect = new StringSelectMenuBuilder()
                     .setCustomId('reminderSelect')
@@ -90,6 +93,7 @@ async function eventInteraction(interaction) {
                             break;
                     }
 
+                    // I dont think we need this anymore. People probably wont be creating events that are during the same day but we can keep it just incase
                     const eventJob = schedule.scheduleJob(date, function () {
                         const embed = new EmbedBuilder()
                             .setColor(global.embedColor)
@@ -112,7 +116,15 @@ async function eventInteraction(interaction) {
                             })
                         channel.send({ embeds: [embed] })
                     })
+            
+                    console.log(`Channel ID: ${channel.id} || Guild ID: ${channel.guild.id}`)
+                    let channelID = channel.id;
+                    channelID = channelID.toString();
+                    
 
+                    
+                   
+                    // channelID = channelID.toString();
                     // add to the database
                     // equivalent to: INSERT INTO tags (name, date, reminder, username,usage_count) values (?, ?, ?,?,?) in SQL;
                     await Event.create({
@@ -120,7 +132,7 @@ async function eventInteraction(interaction) {
                         date: date,
                         reminder: reminderDate,
                         username: interaction.user.username,
-                        channelID: channel,
+                        channelID: channelID,
 
                     }).then(() => {
                         //pull the created at and updated at times from the database
@@ -130,7 +142,7 @@ async function eventInteraction(interaction) {
                                 date: date,
                                 reminder: reminderDate, 
                                 username: interaction.user.username,
-                                channelID: channel,
+                                channelID: channelID,
                             },
                         }).then(event => {
                             console.log('Created event', event.dataValues.createdAt, event.dataValues.updatedAt)
