@@ -26,9 +26,9 @@ async function eventInteraction(interaction) {
                     return;
                 }
                 // Replace "/" with "-" to make the date object work & parse the date
-                // const date = new Date(Date.parse(m.content.replace(/\//g, '-')));
-                const testdate = '2023-05-24T16:00:12.416Z'
-                const date = new Date(Date.parse(testdate.replace(/\//g, '-')));
+                const date = new Date(Date.parse(m.content.replace(/\//g, '-')));
+
+
                 console.log(date)
 
                 // Get the channel id of the channel the interaction was started in in the form of a discord.js channel object
@@ -116,15 +116,12 @@ async function eventInteraction(interaction) {
                             })
                         channel.send({ embeds: [embed] })
                     })
-            
+
+                    const channel = interaction.channel;
                     console.log(`Channel ID: ${channel.id} || Guild ID: ${channel.guild.id}`)
                     let channelID = channel.id;
-                    channelID = channelID.toString();
                     
 
-                    
-                   
-                    // channelID = channelID.toString();
                     // add to the database
                     // equivalent to: INSERT INTO tags (name, date, reminder, username,usage_count) values (?, ?, ?,?,?) in SQL;
                     await Event.create({

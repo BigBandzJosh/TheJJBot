@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
         },
         channelID: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: false,
         },
     }, {
