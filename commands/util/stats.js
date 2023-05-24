@@ -17,7 +17,7 @@ module.exports = {
                 },
             });
             if(isUserCreated){ // if user has a profile
-                console.log("User has a profile");
+                
                 // do something
                 const user = await userProfile.findOne({
                     where: {
@@ -39,7 +39,7 @@ module.exports = {
                     await interaction.reply({embeds: [profileEmbed]});
             } else if(!isUserCreated){ // if user does not have a profile
                 // create a profile
-                console.log("User does not have a profile");
+                
                 await userProfile.create({
                     userId: userId,
                     commandUsage: 0,

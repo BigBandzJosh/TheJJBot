@@ -26,7 +26,7 @@ module.exports = {
 
             global.eventTitleName = interaction.options.getString("eventname");
             
-            console.log(eventTitleName);
+            
             await interaction.reply({
                 content:`Are you sure you want to create an event called ${eventTitleName}?`, 
                 components: [row],   

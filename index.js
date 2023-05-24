@@ -89,7 +89,7 @@ client.on('messageCreate', async message => {
 })
 
 app.listen(port, () => {
-    console.log(`Example app listening at ${port}`)
+    console.log(`listening at ${port}`)
 });
 // Login to Discord with your client's token
 client.login(process.env.DiscordAPI);

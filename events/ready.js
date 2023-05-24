@@ -27,7 +27,7 @@ module.exports = {
                 const channelID = event.channelID;
                 // Get the channel
                 const channel = client.channels.cache.get(channelID);
-                console.log(channel)
+                
 
                  // If the event is in the past, delete it from the database
         if (eventDate < Date(Date.now())) {

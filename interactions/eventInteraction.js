@@ -17,7 +17,7 @@ async function eventInteraction(interaction) {
             const collector = interaction.channel.createMessageCollector({ filter, max: 1, time: 60000 });
             // When the user replies, console log their response
             collector.on('collect', m => {
-                console.log(m.content)
+                
                 // Regex to make sure the users date is in the format of YYYY/MM/DD
                 const dateRegex = new RegExp('^[0-9]{4}/[0-9]{2}/[0-9]{2}$');
                 // If the user's response does not match the regex, send a message telling them to try again
@@ -29,7 +29,7 @@ async function eventInteraction(interaction) {
                 const date = new Date(Date.parse(m.content.replace(/\//g, '-')));
 
 
-                console.log(date)
+                
 
                 // Get the channel id of the channel the interaction was started in in the form of a discord.js channel object
                 const channel = interaction.channel;
@@ -65,8 +65,8 @@ async function eventInteraction(interaction) {
                 const reminderCollector = interaction.channel.createMessageComponentCollector({ reminderFilter, max: 1, time: 60000 });
                 // When the user replies, get the message and store it in a variable
                 reminderCollector.on('collect', async i => {
-                    // console log the message
-                    console.log(i.values[0])
+                    
+                    
 
                     i.deferUpdate();
                     // Send a message confirming the event creation
@@ -118,7 +118,7 @@ async function eventInteraction(interaction) {
                     })
 
                     const channel = interaction.channel;
-                    console.log(`Channel ID: ${channel.id} || Guild ID: ${channel.guild.id}`)
+                    
                     let channelID = channel.id;
                     
 

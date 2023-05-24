@@ -24,7 +24,7 @@ module.exports = {
                 if ('data' in command && 'execute' in command) {
                     commandNames.push(command.data.name);
                 } else {
-                    console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
+                    return;
                 }
             }
             // Capitalize the folder name at the first letter
