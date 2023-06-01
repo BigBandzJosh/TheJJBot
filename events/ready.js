@@ -12,34 +12,24 @@ module.exports = {
 
         console.log(`Ready! Logged in as ${client.user.tag}`);
 
-        let eventName;
-        let eventDate;
-        let eventReminder;
-        let channelID;
-        let channel;
+ 
         // Find all events in the database
         Event.findAll().then(events => {
             // Loop through each event
             events.forEach(event => {
                 // Get the event name
-                eventName = event.name;
+                const eventName = event.name;
                 // Get the event date
-                eventDate = new Date(event.date);
+                const eventDate = new Date(event.date);
                 // Get the event reminder
-                eventReminder = event.reminder;
+                const eventReminder = event.reminder;
                 // Get the channel ID
-                channelID = event.channelID;
+                const channelID = event.channelID;
                 // Get the channel
-                channel = client.channels.cache.get(channelID);
-                console.log(channelID)
-            })
-        })
+                const channel = client.channels.cache.get(channelID);
+                
 
-
-
-
-
-        // If the event is in the past, delete it from the database
+                 // If the event is in the past, delete it from the database
         if (eventDate < Date(Date.now())) {
             // Delete the event from the database
             Event.destroy({
@@ -76,6 +66,14 @@ module.exports = {
             console.log(`Recreated ${eventName} Reminder in the database.`)
 
         }
+            })
+        })
+
+
+
+
+
+       
     }
 }
 

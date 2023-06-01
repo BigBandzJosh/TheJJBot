@@ -17,7 +17,7 @@ async function eventInteraction(interaction) {
             const collector = interaction.channel.createMessageCollector({ filter, max: 1, time: 60000 });
             // When the user replies, console log their response
             collector.on('collect', m => {
-                console.log(m.content)
+                
                 // Regex to make sure the users date is in the format of YYYY/MM/DD
                 const dateRegex = new RegExp('^[0-9]{4}/[0-9]{2}/[0-9]{2}$');
                 // If the user's response does not match the regex, send a message telling them to try again
@@ -26,10 +26,10 @@ async function eventInteraction(interaction) {
                     return;
                 }
                 // Replace "/" with "-" to make the date object work & parse the date
-                // const date = new Date(Date.parse(m.content.replace(/\//g, '-')));
-                const testdate = '2023-05-24T16:00:12.416Z'
-                const date = new Date(Date.parse(testdate.replace(/\//g, '-')));
-                console.log(date)
+                const date = new Date(Date.parse(m.content.replace(/\//g, '-')));
+
+
+                
 
                 // Get the channel id of the channel the interaction was started in in the form of a discord.js channel object
                 const channel = interaction.channel;
@@ -65,8 +65,8 @@ async function eventInteraction(interaction) {
                 const reminderCollector = interaction.channel.createMessageComponentCollector({ reminderFilter, max: 1, time: 60000 });
                 // When the user replies, get the message and store it in a variable
                 reminderCollector.on('collect', async i => {
-                    // console log the message
-                    console.log(i.values[0])
+                    
+                    
 
                     i.deferUpdate();
                     // Send a message confirming the event creation
@@ -116,15 +116,12 @@ async function eventInteraction(interaction) {
                             })
                         channel.send({ embeds: [embed] })
                     })
-            
-                    console.log(`Channel ID: ${channel.id} || Guild ID: ${channel.guild.id}`)
+
+                    const channel = interaction.channel;
+                    
                     let channelID = channel.id;
-                    channelID = channelID.toString();
                     
 
-                    
-                   
-                    // channelID = channelID.toString();
                     // add to the database
                     // equivalent to: INSERT INTO tags (name, date, reminder, username,usage_count) values (?, ?, ?,?,?) in SQL;
                     await Event.create({

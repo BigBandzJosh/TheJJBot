@@ -12,10 +12,10 @@ module.exports = {
     async execute(interaction) {
         try{
             const word = interaction.options.getString("word")
-        console.log(word)
+        
         async function defineWord(word) {
             if (typeof word !== 'string') {
-                console.log("Word is not a string")
+                
                 return;
             }
             const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}`);
@@ -25,7 +25,7 @@ module.exports = {
 
         }
         const wordData = await defineWord(word);
-        console.log(wordData[0].meanings[0].definitions[0])
+        
 
         // Accessing the first definition object
         const definition = wordData[0].meanings[0].definitions[0].definition;
