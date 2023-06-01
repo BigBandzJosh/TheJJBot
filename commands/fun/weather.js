@@ -16,7 +16,7 @@ module.exports = {
 
         const weather = {};
 
-        const url = ` http://api.weatherapi.com/v1/forecast.json?key=${process.env.WeatherAPI}&q=${location}&aqi=no&alerts=no`
+        const url = ` http://api.weatherapi.com/v1/forecast.json?key=${process.env.WeatherAPI}&q=${location}&aqi=yes&alerts=no`
 
         const response = await fetch(url);
         const data = await response.json();
@@ -43,6 +43,7 @@ module.exports = {
         weather.region = data.location.region;
         weather.country = data.location.country;
         weather.currentTime = data.current.last_updated;
+        console.log(weather);
 
         //add the weather to the database
         await weatherCollection.create({
@@ -89,22 +90,31 @@ module.exports = {
             )
             .setTimestamp()
 
-            /*  const airQualityEmbed = new EmbedBuilder()
+            const airQualityObject = {
+                co: data.current.air_quality.co,
+                no2: data.current.air_quality.no2,
+                o3: data.current.air_quality.o3,
+                so2: data.current.air_quality.so2,
+                pm2_5: data.current.air_quality.pm2_5,
+                pm10: data.current.air_quality.pm10,
+            }
+
+              const airQualityEmbed = new EmbedBuilder()
             .setColor(global.embedColor)
             .setTitle(`Air Quality for ${weather.city}, ${weather.country}`)
             .setDescription(`**Air Quality**`)
             .setThumbnail(`https:${weather.icon}`)
             .addFields(
-                { name: "CO", value: `${data.current.air_quality.co}µg/m³`, inline: true },
-                { name: "NO2", value: `${data.current.air_quality.no2}µg/m³`, inline: true },
-                { name: "O3", value: `${data.current.air_quality.o3}µg/m³`, inline: true },
-                { name: "SO2", value: `${data.current.air_quality.so2}µg/m³`, inline: true },
-                { name: "PM2.5", value: `${data.current.air_quality.pm2_5}µg/m³`, inline: true },
-                { name: "PM10", value: `${data.current.air_quality.pm10}µg/m³`, inline: true },
+                { name: "Carbon Monoxide", value: `${airQualityObject.co}µg/m³`, inline: true },
+                { name: "Nitrogen Dioxide", value: `${airQualityObject.no2}µg/m³`, inline: true },
+                { name: "Ozone", value: `${airQualityObject.o3}µg/m³`, inline: true },
+                { name: "Sulphur Dioxide", value: `${airQualityObject.so2}µg/m³`, inline: true },
+                { name: "PM2.5", value: `${airQualityObject.pm2_5}µg/m³`, inline: true },
+                { name: "PM10", value: `${airQualityObject.pm10}µg/m³`, inline: true },
             )
             .setTimestamp()
-            */
-        await interaction.editReply({ embeds: [weatherEmbed] });
+            
+        await interaction.editReply({ embeds: [weatherEmbed, airQualityEmbed] });
         }catch(error){
             console.log(error);
             await interaction.editReply({content: "Please enter a valid location", ephemeral: true});

@@ -61,7 +61,7 @@ module.exports = {
                     })
                 channel.send({ embeds: [embed] })
             })
-            console.log(`Recreated ${eventName} in the database.`)
+            console.log(`Recreated ${global.eventTitleName} in the database.`)
             const reminderJob = schedule.scheduleJob(eventReminder, function () {
                 const embed = new EmbedBuilder()
                     .setColor(global.embedColor)
