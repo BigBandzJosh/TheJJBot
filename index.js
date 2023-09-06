@@ -26,11 +26,6 @@ const client = new Client({
     ],
 });
 
-// Creates a new collection for commands
-
-
-
-
 //Creates a new collection for commands
 client.commands = new Collection();
 const foldersPath = path.join(__dirname, 'commands');
@@ -38,7 +33,6 @@ const commandFolders = fs.readdirSync(foldersPath);
 
 // Registers all of the commands from the "commands" folder.
 for (const folder of commandFolders) {
-
     // This code loads all the command files in the commands folder
     const commandsPath = path.join(foldersPath, folder);
     const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
